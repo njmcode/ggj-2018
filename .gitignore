@@ -1,6 +1,7 @@
 # Added by njmcode
 
 node_modules/
+dist/
 *.*~
 
 # Logs

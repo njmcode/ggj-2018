@@ -49,7 +49,7 @@ const baseConfig = {
     ],
   },
   plugins: [
-    new ExtractTextPlugin('../dist/styles.css'),
+    new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin({
       template: path.join(SRC_PATH, 'shell', 'index.html'),
       filename: 'index.html',
@@ -65,7 +65,7 @@ const baseConfig = {
   output: {
     filename: '[name].bundle.js',
     path: DIST_PATH,
-    publicPath: 'http://localhost:8080/',
+    publicPath: '',
   },
 }
 
