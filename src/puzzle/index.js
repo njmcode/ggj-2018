@@ -88,5 +88,13 @@ function render () {
   }
 }
 
-document.body.appendChild(puzzleEl)
-render(currentArr)
+function init () {
+  console.log('Puzzle init')
+  document.body.appendChild(puzzleEl)
+  render(currentArr)
+}
+
+export default {
+  init
+}
+

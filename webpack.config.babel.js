@@ -7,8 +7,7 @@ const DIST_PATH = path.join(__dirname, 'dist')
 
 const baseConfig = {
   entry: {
-    chat: path.join(SRC_PATH, 'chat', 'index.js'),
-    puzzle: path.join(SRC_PATH, 'puzzle', 'index.js')
+    index: path.join(SRC_PATH, 'index.js'),
   },
   module: {
     rules: [
@@ -26,6 +25,7 @@ const baseConfig = {
       // CSS Modules + import
       {
         test: /\.css$/,
+        include: SRC_PATH,
         use: ExtractTextPlugin.extract({
           use: {
             loader: 'css-loader',
