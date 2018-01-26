@@ -2,10 +2,9 @@ import styles from './chat.css';
 
 /**
  * Chat window prototype
- * 
+ *
  * @author reuben-bradley
  */
-console.log('Chat index');
 
 const messages = [
     { agent: 'other', msg: 'Hello?' },
@@ -19,6 +18,7 @@ let msgWindow;
 let currentIndex = 0;
 
 const init = () => {
+    console.log('Chat init')
     const mainWindow = document.getElementById('main');
     msgWindow = document.createElement('div');
     msgWindow.id = 'msgWindow';
@@ -42,4 +42,6 @@ const displayMessage = (message) => {
     msgWindow.append(container);
 }
 
-init();
+export default {
+  init
+}
