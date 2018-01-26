@@ -5,6 +5,14 @@ import styles from './puzzle.css';
  * @author njmcode
 */
 
+const PUZZLE_DIM = 3 // width/height - puzzle is square
+const puzzleArrLen = PUZZLE_DIM * PUZZLE_DIM
+const namespace = styles.puzzle;
+
+
+let puzzleEl, solutionArr, currentArr, solutionArrString, blankSpace
+
+// Basic array shuffle
 function shuffle(a) {
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -12,32 +20,6 @@ function shuffle(a) {
   }
   return a;
 }
-
-const namespace = styles.puzzle;
-
-const puzzleEl = document.createElement('div')
-puzzleEl.classList.add(namespace);
-
-const PUZZLE_DIM = 3 // width/height - puzzle is square
-
-// Set up solution & current arrays
-const puzzleArrLen = PUZZLE_DIM * PUZZLE_DIM
-
-let solutionArr = []
-let currentArr = []
-
-for (let i = 0; i < puzzleArrLen; i++) {
-  const item = (i === puzzleArrLen - 1) ? null : i
-  solutionArr.push(item)
-  currentArr.push(item)
-}
-const solutionArrString = JSON.stringify(solutionArr)
-
-// Shuffle
-shuffle(currentArr)
-console.log('puzzle', currentArr)
-let blankSpace = currentArr.indexOf(null)
-console.log('blank', blankSpace)
 
 // Handle click, swap items
 const handleClick = e => {
@@ -90,7 +72,25 @@ function render () {
 
 function init () {
   console.log('Puzzle init')
+
+  puzzleEl = document.createElement('div')
+  puzzleEl.classList.add(namespace);
   document.body.appendChild(puzzleEl)
+
+  solutionArr = []
+  currentArr = []
+
+  for (let i = 0; i < puzzleArrLen; i++) {
+    const item = (i === puzzleArrLen - 1) ? null : i
+    solutionArr.push(item)
+    currentArr.push(item)
+  }
+  solutionArrString = JSON.stringify(solutionArr)
+
+  // Shuffle
+  shuffle(currentArr)
+  blankSpace = currentArr.indexOf(null)
+
   render(currentArr)
 }
 

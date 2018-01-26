@@ -1,4 +1,5 @@
 import styles from './chat.css';
+import template from './template';
 
 /**
  * Chat window prototype
@@ -19,13 +20,12 @@ let currentIndex = 0;
 
 const init = () => {
     console.log('Chat init')
-    const mainWindow = document.getElementById('main');
-    msgWindow = document.createElement('div');
-    msgWindow.id = 'msgWindow';
-    msgWindow.classList.add(styles.msgWindow);
-    mainWindow.append(msgWindow);
-    recurseMessages();
 };
+
+const onEnter = (tabContentEl) => {
+  msgWindow = tabContentEl
+  recurseMessages();
+}
 
 const recurseMessages = () => {
     displayMessage(messages[currentIndex]);
@@ -43,5 +43,7 @@ const displayMessage = (message) => {
 }
 
 export default {
-  init
+  init,
+  template,
+  onEnter,
 }
