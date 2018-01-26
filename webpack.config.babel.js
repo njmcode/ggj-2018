@@ -51,7 +51,7 @@ const baseConfig = {
   plugins: [
     new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin({
-      template: path.join(SRC_PATH, 'shell', 'index.html'),
+      template: path.join(SRC_PATH, 'index.html'),
       filename: 'index.html',
     }),
   ],
