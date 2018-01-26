@@ -1,0 +1,31 @@
+@value neon1 from 'shared/colors.css';
+
+.puzzle,
+.puzzle * {
+  box-sizing: border-box;
+}
+
+.puzzle {
+  border: 1px solid blue;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 302px;
+}
+
+.puzzlePiece {
+  width: 100px;
+  height: 100px;
+  background: neon1;
+  color: blue;
+  cursor: pointer;
+  border: 2px outset silver;
+}
+
+.puzzlePieceEmpty {
+  cursor: default;
+  background: transparent;
+}

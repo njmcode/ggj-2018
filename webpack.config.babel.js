@@ -1,5 +1,6 @@
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 const SRC_PATH = path.join(__dirname, 'src')
 const DIST_PATH = path.join(__dirname, 'dist')
@@ -11,6 +12,7 @@ const baseConfig = {
   },
   module: {
     rules: [
+      // JS Babel transpilation
       {
         test: /\.js$/,
         include: SRC_PATH,
@@ -20,6 +22,19 @@ const baseConfig = {
         use: [{
           loader: 'babel-loader',
         }],
+      },
+      // CSS Modules + import
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          use: {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+            },
+          },
+        }),
       },
       // Assets handled as file paths for import
       {
@@ -34,6 +49,7 @@ const baseConfig = {
     ],
   },
   plugins: [
+    new ExtractTextPlugin('../dist/styles.css'),
     new HtmlWebpackPlugin({
       template: path.join(SRC_PATH, 'shell', 'index.html'),
       filename: 'index.html',
