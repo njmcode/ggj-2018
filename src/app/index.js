@@ -50,6 +50,8 @@ class App {
 
     this.emitter = new Emitter()
     this.gamestate = new GameState(this.emitter)
+
+    window.emitter = this.emitter
   }
 
   start() {

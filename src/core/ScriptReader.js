@@ -22,6 +22,8 @@ class ScriptReader {
   }
 
   startChapter(id) {
+    if (id === null) return false
+
     if (!(id in this.script.chapters)) {
       console.warn('ScriptReader: invalid chapter id', id)
       return false
