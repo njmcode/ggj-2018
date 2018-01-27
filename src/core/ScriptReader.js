@@ -16,7 +16,7 @@ class ScriptReader {
     this.currentChapter = null
     this.currentChapterId = null
     this.chapterLength = 0
-    this.currentChapterMsgIdx = 0
+    this.currentChapterMsgIdx = -1
 
     if (id) this.startChapter(id)
   }
@@ -29,7 +29,7 @@ class ScriptReader {
     this.currentChapter = this.script.chapters[id]
     this.currentChapterId = id
     this.chapterLength = this.currentChapter.length
-    this.currentChapterMsgIdx = 0
+    this.currentChapterMsgIdx = -1
   }
 
   getNextMsg() {
