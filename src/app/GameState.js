@@ -6,7 +6,9 @@ import {
   EVT_CHOICES_RECEIVED,
   EVT_MESSAGE_RECEIVED,
   EVT_PUZZLE_FAIL,
-  EVT_PUZZLE_SUCCESS
+  EVT_PUZZLE_SUCCESS,
+  EVT_PUZZLE_FIRST_OPEN,
+  EVT_PUZZLE_DATA_SENT
 } from 'data/events'
 
 /**
@@ -31,12 +33,24 @@ class GameState {
     this.initialChapter = 'intro1'
 
     this.choiceHistory = []
-    this.puzzleAttemptsLeft = 2
+
+    this.puzzleAttemptsLeft = 3
+    this.totalPuzzles = 9
+    this.puzzleStatus = []
+    for (let i = 0; i < this.totalPuzzles; i++) {
+      this.puzzleStatus.push({
+        puzzleID: 0,
+        isComplete: false,
+        isSent: false
+      })
+    }
   }
 
   init() {
     this.emitter.bind(EVT_CHOICE_SELECTED, this.handlePlayerDecision, this)
+    this.emitter.bind(EVT_PUZZLE_FIRST_OPEN, this.handleFirstPuzzleOpen, this)
     this.emitter.bind(EVT_PUZZLE_SUCCESS, this.handlePuzzleSuccess, this)
+    this.emitter.bind(EVT_PUZZLE_DATA_SENT, this.handlePuzzleDataSent, this)
     this.emitter.bind(EVT_PUZZLE_FAIL, this.handlePuzzleFail, this)
     this.emitter.bind(EVT_ADVANCE_GAME_STATE, this.advance, this)
 
@@ -59,6 +73,16 @@ class GameState {
     }
   }
 
+  /** Game logic and advancement callbacks */
+
+  getCompletedPuzzleCount() {
+    return this.puzzleStatus.filter(p => p.isComplete).length
+  }
+
+  getSentPuzzleDataCount() {
+    return this.puzzleStatus.filter(p => p.isComplete && p.isSent).length
+  }
+
   handlePlayerDecision(choice) {
     // TODO: handle game/state logic around selection
     this.choiceHistory.push(choice)
@@ -66,13 +90,55 @@ class GameState {
     this.advance()
   }
 
-  handlePuzzleSuccess(puzzleId) {
-    // todo
+  // Chat tutorial when first decryption attempted
+  handleFirstPuzzleOpen() {
+    this.reader.startChapter('tutorial')
+    this.advance()
   }
 
-  handlePuzzleFail(puzzleId) {
-    // todo
+  // Called when a puzzle is completed (decrypted)
+  handlePuzzleSuccess(puzzleId) {
+    this.puzzleStatus[puzzleId].isComplete = true
+
+    // Instructions after completing first puzzle
+    if (this.getCompletedPuzzleCount() === 1) {
+      this.reader.startChapter('firstpuzzlecomplete')
+      this.advance()
+    }
   }
+
+  // Called when a puzzle data is sent
+  handlePuzzleDataSent(puzzleId) {
+    this.puzzleStatus[puzzleId].isSent = true
+
+    // Response after first puzzle sent
+    if (this.getSentPuzzleDataCount() === 1) {
+      this.reader.startChapter('firstpuzzlesent')
+      this.advance()
+    }
+  }
+
+  // Fail messages if you screw up
+  handlePuzzleFail(puzzleId) {
+    this.puzzleAttemptsLeft--
+
+    if (this.puzzleAttemptsLeft > 1) {
+      this.reader.startChapter('failstate1')
+      this.advance()
+    } else if (this.puzzleAttemptsLeft > 0) {
+      this.reader.startChapter('failstate2')
+      this.advance()
+    } else if (this.puzzleAttemptsLeft === 0) {
+      this.reader.startChapter('failstate3')
+      this.advance()
+    }
+  }
+
+  handleGameOver() {
+    // TODO: game over
+    console.log('GAME OVER')
+  }
+
 }
 
 export default GameState

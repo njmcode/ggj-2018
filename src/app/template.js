@@ -3,7 +3,7 @@ import style from './style.css'
 export default `
 <div id="main" class="${style.appWrapper}">
   <header class="${style.appHeader}">
-    <h1>CompuChat v1.0a</h1>
+    <h1>ISeekU v1.0.3a</h1>
   </header>
   <nav class="${style.tabNav}">
   </nav>
