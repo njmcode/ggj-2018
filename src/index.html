@@ -38,18 +38,19 @@
         font-family: 'System',sans-serif;
         text-align: center;
         padding: 1em;
+        animation: showSplash 1s steps(2);
+        animation-delay: 1s;
       }
       #splash-inner h3 {
         font-weight: 800;
       }
-      #splash-inner button {
-        -webkit-appearance: none;
-        appearance: none;
-        background: silver;
-        border: 2px outset lightgray;
-        padding: 4px;
-        font-weight: 800;
-        cursor:pointer;
+      @keyframes showSplash {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
       }
     </style>
   </head>
@@ -67,5 +68,6 @@
         </button>
       </div>
     </div>
+    <div id="splash-footer"></div>
   </body>
 </html>

@@ -13,6 +13,11 @@ if (SKIP_INTRO) {
 } else {
   const startBut = document.querySelector('#splash-inner button')
   startBut.addEventListener('click', e => {
-    app.start()
+    document.querySelector('#splash-inner').style.display = 'none'
+    setTimeout(() => {
+      app.start()
+    }, 1000)
   })
+
+  //window.addEventListener('beforeunload', e => { e.returnValue = 'Really quit?' })
 }

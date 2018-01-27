@@ -4,6 +4,7 @@ export default `
 <div id="main" class="${style.appWrapper}">
   <header class="${style.appHeader}">
     <h1>ISeekU v1.0.3a</h1>
+    <button class="${style.closeBut}">X</button>
   </header>
   <nav class="${style.tabNav}">
   </nav>

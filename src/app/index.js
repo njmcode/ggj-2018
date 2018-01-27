@@ -60,6 +60,12 @@ class App {
     this.appEl.innerHTML = ''
     this.appEl.appendChild(this.el)
 
+    // Header close button
+    this.closeButEl = this.el.querySelector(`.${styles.closeBut}`)
+    this.closeButEl.addEventListener('click', e => {
+      window.location.reload()
+    })
+
     // DOM areas for nav and content
     this.navEl = this.el.querySelector(`.${styles.tabNav}`)
     this.contentEl = this.el.querySelector(`.${styles.appTabWindow}`)
