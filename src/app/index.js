@@ -5,6 +5,7 @@ import styles from './style.css'
 import Emitter from 'core/Emitter'
 import GameState from './GameState'
 import ChatTab from 'modules/chat/ChatTab'
+import MediaTab from 'modules/media/MediaTab'
 import { CHAT_A, CHAT_B } from 'data/gamescript'
 
 /**
@@ -34,11 +35,11 @@ class App {
         visible: true,
         module: new ChatTab(CHAT_B)
       },
-      /*{
+      {
         id: 'Media',
-        visible: false,
-        module: null
-      }*/
+        visible: true,
+        module: new MediaTab()
+      }
     ]
     this.tabDataIds = this.tabData.map(td => td.id)
 
