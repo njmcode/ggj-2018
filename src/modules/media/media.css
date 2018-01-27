@@ -33,11 +33,31 @@
 }
 
 .mediaDetail {
+    background-color: silver;
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
     position: absolute;
     top: 0;
-    width: 100%;
+    width: calc(100% - 10px);
 }
 
 .mediaDetail > img {
     max-width: 100%;
+}
+
+.formRow {
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.formRow label {
+    margin-right: 10px;
+}
+
+.formRow input {
+    flex-grow: 1;
 }

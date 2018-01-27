@@ -66,17 +66,22 @@
 /* Content */
 
 .appTabWindow {
-  flex-grow: 1;
-  flex-basis: 100%;
   background: silver;
+  display: block;
+  flex-grow: 1;
+  position: relative;
 }
 .appTabWrapper {
   display: none;
-  height: 100%;
   background: black;
 }
 .appTabWrapper.activeContent {
   display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
 }
 
 /* Footer */
