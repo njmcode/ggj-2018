@@ -1,21 +1,24 @@
+@value chatBlue, chatGreen, chatRed from 'shared/colors.css';
+
 .conversationPanel {
-    display: flex;
-    flex-direction: column;
+    display: block;
     height: 100%;
+    overflow-y: scroll;
+    position: relative;
 }
 
 .msgPanel {
+    background: silver;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    overflow-y: scroll;
-    max-height: 400px;
-    background: silver;
+    min-height: 100%;
+    padding: 5px;
 }
 
 .msg {
-    border: 1px solid blue;
-    border-radius: 5px;
+    border: 1px solid chatBlue;
+    border-radius: 10px;
+    margin-bottom: 3px;
     padding: 10px;
     width: 75%;
     background: white;
@@ -24,15 +27,37 @@
 .agentA,
 .agentB {
     align-self: flex-start;
+    border-bottom-left-radius: 0;
+}
+
+.agentA {
+    background-color: chatBlue;
+}
+
+.agentB {
+    background-color: chatRed;
 }
 
 .player {
     align-self: flex-end;
+    background-color: chatGreen;
+    border-bottom-right-radius: 0;
 }
 
 .choicePanel {
-    height: 100px;
     background: blue;
-    flex-shrink: 0;
-    flex-grow: 0;
+    bottom: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    position: sticky;
+    width: 100%;
+}
+
+.choiceButton {
+    margin: 5px 5px 0 5px;
+    padding: 5px;
+}
+
+.choiceButton:last-child {
+    margin-bottom: 5px;
 }
