@@ -1,0 +1,43 @@
+
+.mediaPanel {
+    background: white;
+    height: 100%;
+    position: relative;
+}
+
+.mediaList {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+.imageThumbnail {
+    flex-basis: calc(33% - 10px);
+    margin: 5px;
+    padding-bottom: calc(33% - 10px);
+    position: relative;
+}
+
+.imageThumbnail > img {
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    max-width: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.imageThumbnail.unavailable {
+    background: rgba(0, 0, 0, 0.3) url('assets/closed_lock.png') no-repeat center;
+}
+
+.mediaDetail {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.mediaDetail > img {
+    max-width: 100%;
+}
