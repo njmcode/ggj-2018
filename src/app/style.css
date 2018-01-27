@@ -41,16 +41,30 @@
 .tabNav button {
   -webkit-appearance: none;
   appearance: none;
+  display: none;
 }
-.tabNav button.active {
-  background-color: yellow;
+
+.tabNav button.activeTab {
+  background: yellow;
+}
+.tabNav button.visibleTab {
+  display: inline-block;
 }
 
 /* Content */
 
 .appTabWindow {
   flex-grow: 1;
+  flex-basis: 100%;
   background: silver;
+}
+.appTabWrapper {
+  display: none;
+  height: 100%;
+  background: black;
+}
+.appTabWrapper.activeContent {
+  display: block;
 }
 
 /* Footer */

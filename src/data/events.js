@@ -1,0 +1,11 @@
+/**
+ * Shared event manifest for the entire app to use.
+ */
+
+export const EVT_MESSAGE_RECEIVED = 'EVT_MESSAGE_RECEIVED'
+export const EVT_CHOICES_RECEIVED = 'EVT_CHOICES_RECEIVED'
+export const EVT_GAME_SEND_PHOTOS = 'EVT_GAME_SEND_PHOTOS'
+export const EVT_CHOICE_SELECTED = 'EVT_CHOICE_SELECTED'
+export const EVT_PUZZLE_SUCCESS = 'EVT_PUZZLE_SUCCESS'
+export const EVT_PUZZLE_FAIL = 'EVT_PUZZLE_FAIL'
+export const EVT_ADVANCE_GAME_STATE = 'EVT_ADVANCE_GAME_STATE'
