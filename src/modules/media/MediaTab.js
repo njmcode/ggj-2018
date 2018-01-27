@@ -1,14 +1,7 @@
 import styles from './media.css';
 import { hidden as hiddenCls } from 'shared/main.css';
 import template from './template';
-
-let photoList = [
-    'src/assets/location1.jpg',
-    'src/assets/location2.jpg',
-    'src/assets/location3.jpg',
-    'src/assets/location4.jpg',
-    'src/assets/location5.jpg'
-];
+import photoList from './files';
 
 class MediaTab {
   constructor() {
@@ -19,7 +12,6 @@ class MediaTab {
     this.id = moduleId
     this.emitter = emitter
 
-    console.log('Media tab initialised')
     this.mediaPanel = el.querySelector(`.${styles.mediaPanel}`) || el;
     this.mediaDetail = el.querySelector(`.${styles.mediaDetail}`);
     this.mediaDetail.querySelector('#detail-cancel').addEventListener('click', () => {
@@ -53,7 +45,6 @@ class MediaTab {
   expandPhoto (imgEl) {
     this.mediaDetail.insertBefore(imgEl.cloneNode(false), this.mediaDetail.firstChild);
     this.mediaDetail.classList.remove(hiddenCls);
-    console.log('expanding photo', hiddenCls);
   }
 
   closeDetails () {
