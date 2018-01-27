@@ -2,6 +2,7 @@ import 'shared/main.css'
 
 import AppShell from './shell'
 import Chat from './chat'
+import Media from './media';
 //import Puzzle from './puzzle'
 
 /**
@@ -19,12 +20,7 @@ const TABS = [
   },
   {
     label: 'Media',
-    module: {
-      init: () => {},
-      onEnter: () => {},
-      onExit: () => {},
-      template: `<div>Media</div>`
-    }
+    module: Media
   }
 ]
 

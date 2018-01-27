@@ -20,3 +20,8 @@ body {
   background: black;
   color: white;
 }
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
