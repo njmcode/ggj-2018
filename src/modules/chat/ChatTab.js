@@ -31,6 +31,7 @@ class ChatTab {
     this.messageLog = []
 
     // Cache refs to internal DOM for messages and choices
+    this.convoPanelEl = el.querySelector(`.${styles.conversationPanel}`) || el;
     this.msgPanelEl = el.querySelector(`.${styles.msgPanel}`);
     this.choicePanelEl = el.querySelector(`.${styles.choicePanel}`);
 
@@ -62,13 +63,15 @@ class ChatTab {
   displayMessage(msg) {
     // Render and log a message
     const container = document.createElement('div');
-    container.classList.add(styles.msg, styles[msg.chat]);
-    if (msg.isPlayer) container.classList.add(styles.player)
+    container.classList.add(
+      styles.msg,
+      (msg.isPlayer) ? styles.player : styles[msg.chat]
+    );
     container.textContent = msg.text;
     this.msgPanelEl.appendChild(container);
     this.messageLog.push(msg);
     // Scroll to bottom of panel
-    this.msgPanelEl.scrollTop = this.msgPanelEl.scrollHeight
+    this.convoPanelEl.scrollTop = this.msgPanelEl.scrollHeight
   }
 
   displayChoices(options) {
@@ -77,6 +80,7 @@ class ChatTab {
 
     options.forEach(opt => {
       const button = document.createElement('button');
+      button.classList.add(styles.choiceButton);
       button.setAttribute('type', 'button');
       button.textContent = opt.text;
       button.addEventListener('click', () => {
@@ -91,7 +95,11 @@ class ChatTab {
         this.emitter.dispatch(EVT_CHOICE_SELECTED, opt)
       });
       this.choicePanelEl.appendChild(button);
-    })
+    });
+    // Scroll to the bottom of the panel
+    if (this.convoPanelEl.offsetHeight < this.msgPanelEl.scrollHeight) {
+      this.convoPanelEl.scrollTop = this.convoPanelEl.scrollHeight;
+    }
   }
 
   clearChoices() {

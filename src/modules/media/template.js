@@ -11,11 +11,11 @@ export default `
 <div class="${styles.mediaPanel}">
     <div class="${styles.mediaList}">${imgContainersTemplate}</div>
     <div class="${styles.mediaDetail} ${hidden}">
-        <div>
+        <div class="${styles.formRow}">
             <label>Passcode:</label>
             <input type="text" name="passcode">
         </div>
-        <div>
+        <div class="${styles.formRow}">
             <button id="detail-submit" type="button">Enter</button>
             <button id="detail-cancel" type="button">Cancel</button>
         </div>
