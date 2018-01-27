@@ -15,7 +15,7 @@ import Chat from './chat'
 const TABS = [
   {
     label: 'Chat',
-    module: Chat
+    module: Chat()
   },
   {
     label: 'Media',
