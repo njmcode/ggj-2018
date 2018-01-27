@@ -68,7 +68,7 @@ class GameState {
         setTimeout(() => {
           this.emitter.dispatch(EVT_MESSAGE_RECEIVED, msg)
           this.advance()
-        }, 200) // TODO: calc time to display message
+        }, 1000) // TODO: calc time to display message
       }
     }
   }
