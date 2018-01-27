@@ -37,6 +37,16 @@ class AppShell {
 
     // Render initial tab
     this.goToTabIdx(0)
+
+    // TEST CODE, REMOVE WHEN READY
+    this.tabs[0].module.playIncoming([
+      { agent: 'blue', msg: 'Hello?' },
+      { agent: 'blue', msg: 'Agent 045, are you there?' }
+    ]);
+    this.tabs[0].module.provideChoice([
+      { text: 'Who is this?', callback: () => console.log('owl response') },
+      { text: 'Acknowledged, awaiting command.', callback: () => console.log('soldier response') }
+    ]);
   }
 
   goToTabIdx(idx) {

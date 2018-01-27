@@ -1,5 +1,5 @@
 
-.msgWindow {
+.msgPanel {
     display: flex;
     flex-flow: column nowrap;
 }
@@ -11,7 +11,8 @@
     width: 75%;
 }
 
-.agent-other {
+.agent-red,
+.agent-blue {
     align-self: flex-start;
 }
 
