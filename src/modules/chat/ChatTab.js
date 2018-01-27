@@ -2,7 +2,8 @@ import template from './template'
 import {
   EVT_MESSAGE_RECEIVED,
   EVT_CHOICES_RECEIVED,
-  EVT_CHOICE_SELECTED
+  EVT_CHOICE_SELECTED,
+  EVT_TAB_NOTIFY
 } from 'data/events'
 import styles from './chat.css'
 
@@ -25,7 +26,8 @@ class ChatTab {
     this.template = template
   }
 
-  init (el, emitter) {
+  init (moduleId, el, emitter) {
+    this.id = moduleId
     this.emitter = emitter
 
     this.messageLog = []
@@ -57,6 +59,7 @@ class ChatTab {
       // Render message output
       this.displayMessage(msg)
     }
+    this.emitter.dispatch(EVT_TAB_NOTIFY, this.id)
   }
 
   displayMessage(msg) {
