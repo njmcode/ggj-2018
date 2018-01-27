@@ -1,5 +1,24 @@
 import * as Events from './events'
 
+/**
+ * The game 'script'.
+ * Defines 'chapters' of the story made up of a list of
+ * chat messages.
+ *
+ * A message can have the following props:
+ *
+ *  - chat: which chat window this belongs to
+ *  - text: text to be shown for the message
+ *  - event: an event which the GameState can fire when this message is received
+ *  - choices: an array of options for the player to choose from
+ *
+ * Choices can have the following:
+ *
+ *  - text: label for the option
+ *  - goto: which chapter ID to go to when this option is selected
+ *
+ */
+
 export const CHAT_A = 'agentA'
 export const CHAT_B = 'agentB'
 

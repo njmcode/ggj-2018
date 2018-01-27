@@ -7,6 +7,16 @@ import GameState from './GameState'
 import ChatTab from 'modules/chat/ChatTab'
 import { CHAT_A, CHAT_B } from 'data/gamescript'
 
+/**
+ * Main app UI class.
+ *
+ * - Composes the tab modules, event emitter and game
+ * state
+ * - Determines the available tabs and their default state
+ * - Handles tab switching and visibility/rendering
+ * - Initialises the tab modules
+ * - Shares an Emitter instance between itself, game state and tab modules
+ */
 
 class App {
   constructor() {

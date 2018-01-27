@@ -1,3 +1,7 @@
+/**
+ * Shared event manifest for the entire app to use.
+ */
+
 export const EVT_MESSAGE_RECEIVED = 'EVT_MESSAGE_RECEIVED'
 export const EVT_CHOICES_RECEIVED = 'EVT_CHOICES_RECEIVED'
 export const EVT_GAME_SEND_PHOTOS = 'EVT_GAME_SEND_PHOTOS'

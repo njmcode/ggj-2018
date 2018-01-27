@@ -9,6 +9,20 @@ import {
   EVT_PUZZLE_SUCCESS
 } from 'data/events'
 
+/**
+ * Internal module to handle game state.
+ * Responsible for 'pushing out' new messages from the
+ * game script and firing events that the tab modules
+ * and app shell can respond to.
+ *
+ * Also handles all internal game logic for what happens
+ * when certain events are fired (puzzle completion,
+ * choices made by the player, etc)
+ *
+ * Renders no UI of its own.
+ * Uses an Emitter instance passed into it.
+ */
+
 class GameState {
   constructor(emitter) {
     this.emitter = emitter
