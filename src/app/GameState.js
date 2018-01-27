@@ -61,6 +61,7 @@ class GameState {
 
   handlePlayerDecision(choice) {
     // TODO: handle game/state logic around selection
+    this.choiceHistory.push(choice)
     this.reader.startChapter(choice.goto)
     this.advance()
   }

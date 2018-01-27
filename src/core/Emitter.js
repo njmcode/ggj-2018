@@ -1,4 +1,7 @@
 
+/**
+ * Basic event bus/dispatcher.
+ */
 class Emitter {
   constructor() {
     this.events = {}

@@ -67,6 +67,8 @@ class ChatTab {
     container.textContent = msg.text;
     this.msgPanelEl.appendChild(container);
     this.messageLog.push(msg);
+    // Scroll to bottom of panel
+    this.msgPanelEl.scrollTop = this.msgPanelEl.scrollHeight
   }
 
   displayChoices(options) {

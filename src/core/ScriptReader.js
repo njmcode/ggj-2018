@@ -1,3 +1,11 @@
+/**
+ * Utility class to read 'game script' data and keep
+ * track of what chapter/message we're currently on.
+ *
+ * Exposes method for changing chapter and getting the
+ * next message, if available, of the current one.
+ */
+
 class ScriptReader {
   constructor(script) {
     this.script = script
@@ -9,7 +17,6 @@ class ScriptReader {
     this.currentChapterId = null
     this.chapterLength = 0
     this.currentChapterMsgIdx = 0
-    this.choiceHistory = []
 
     if (id) this.startChapter(id)
   }
@@ -32,21 +39,6 @@ class ScriptReader {
     }
     this.currentChapterMsgIdx++
     return this.currentChapter[this.currentChapterMsgIdx]
-  }
-
-  handleChoice(choiceObj) {
-    if (choice.goto) {
-      if (!(choice.goto in this.script.chapters)) {
-        console.warn('ScriptReader: invalid goto id for choice', choice)
-        return false
-      }
-
-      if (choice.id) {
-        this.choiceHistory.push(choice.id)
-      }
-
-      this.startChapter(choice.goto)
-    }
   }
 }
 
