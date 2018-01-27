@@ -46,6 +46,18 @@ const baseConfig = {
             outputPath: 'assets/',
           },
         }],
+      },
+      // Web app manifest file - straight copy via import
+      {
+        test: /manifest.json/,
+        include: SRC_PATH,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            outputPath: '/',
+            name: '[name].[ext]'
+          },
+        }],
       }
     ],
   },

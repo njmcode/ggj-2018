@@ -1,4 +1,5 @@
 import 'shared/main.css'
+import './manifest.json'
 
 import App from './app'
 

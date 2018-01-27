@@ -137,7 +137,6 @@ class App {
     const tidx = this.tabDataIds.indexOf(tabId)
     if (tidx === -1) return false
     this.tabData[tidx]._navEl.classList.add(styles.tabNotify)
-
   }
 }
 
