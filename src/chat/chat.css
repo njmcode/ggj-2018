@@ -8,11 +8,13 @@
     border: 1px solid blue;
     border-radius: 5px;
     padding: 10px;
-    width: 50%;
+    width: 75%;
 }
 
-.agentother {}
+.agent-other {
+    align-self: flex-start;
+}
 
-.agentplayer {
+.agent-player {
     align-self: flex-end;
 }
