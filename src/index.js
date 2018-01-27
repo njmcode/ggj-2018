@@ -22,6 +22,7 @@ const TABS = [
     module: {
       init: () => {},
       onEnter: () => {},
+      onExit: () => {},
       template: `<div>Media</div>`
     }
   }
