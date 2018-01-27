@@ -32,6 +32,7 @@ const baseConfig = {
             options: {
               modules: true,
               importLoaders: 1,
+              localIdentName: '[folder]__[name]__[local]_[hash:6]'
             },
           },
         }),
