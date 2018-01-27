@@ -15,7 +15,8 @@ class MediaTab {
     this.template = template
   }
 
-  init (el, emitter) {
+  init (moduleId, el, emitter) {
+    this.id = moduleId
     this.emitter = emitter
 
     console.log('Media tab initialised')

@@ -5,9 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="darkgray">
     <meta charset="utf-8">
+    <link rel="manifest" href="manifest.json">
+    <style>
+      #splash {
+        background: linear-gradient(navy, black);
+        color: white;
+        height: 100%;
+        padding: 1em;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        height: 100%;
+        align-items: center;
+      }
+      #splash h1 {
+        font-family: "Times", serif;
+        font-size: 2em;
+        text-shadow: 4px 4px 0 black;
+        font-style: italic;
+        margin: 0;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+      #splash-inner {
+        background: silver;
+        border: 4px outset lightgray;
+        width: 300px;
+        margin: 0 auto;
+        color: black;
+        font-family: 'System',sans-serif;
+        text-align: center;
+        padding: 1em;
+      }
+      #splash-inner h3 {
+        font-weight: 800;
+      }
+      #splash-inner button {
+        -webkit-appearance: none;
+        appearance: none;
+        background: silver;
+        border: 2px outset lightgray;
+        padding: 4px;
+        font-weight: 800;
+        cursor:pointer;
+      }
+    </style>
   </head>
   <body>
-    <div id="main">
+    <div id="splash">
+      <h1>Global Game Jam 2018</h1>
+      <div id="splash-inner">
+        <div id="splash-logo">
+
+        </div>
+        <h3>ISeekU</h3>
+        <p>(C) 1996 The Reubens. Written for Global Game Jam 2018.</p>
+        <button>
+          Start
+        </button>
+      </div>
     </div>
   </body>
 </html>

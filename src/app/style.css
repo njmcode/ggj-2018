@@ -42,6 +42,7 @@
   -webkit-appearance: none;
   appearance: none;
   display: none;
+  position: relative;
 }
 
 .tabNav button.activeTab {
@@ -49,6 +50,17 @@
 }
 .tabNav button.visibleTab {
   display: inline-block;
+}
+.tabNav button.tabNotify:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: red;
+  top: 0;
+  right: 0;
 }
 
 /* Content */

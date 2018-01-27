@@ -6,7 +6,9 @@ import Emitter from 'core/Emitter'
 import GameState from './GameState'
 import ChatTab from 'modules/chat/ChatTab'
 import MediaTab from 'modules/media/MediaTab'
+
 import { CHAT_A, CHAT_B } from 'data/gamescript'
+import { EVT_TAB_NOTIFY } from 'data/events'
 
 /**
  * Main app UI class.
@@ -27,16 +29,19 @@ class App {
     this.tabData = [
       {
         id: 'ChatA',
+        label: '???',
         visible: true,
         module: new ChatTab(CHAT_A)
       },
       {
         id: 'ChatB',
+        label: '???',
         visible: true,
         module: new ChatTab(CHAT_B)
       },
       {
         id: 'Media',
+        label: 'Media',
         visible: true,
         module: new MediaTab()
       }
@@ -87,8 +92,15 @@ class App {
       tdata._wrapEl = tabWrapEl
       tdata._contentEl = tabContentEl
 
-      tdata.module.init(tabContentEl, this.emitter)
+      tdata.module.init(tdata.id, tabContentEl, this.emitter)
     })
+
+    // Show notification on tabs if not the current one
+    this.emitter.bind(EVT_TAB_NOTIFY, (tabId) => {
+      if (tabId !== this.activeTab) {
+        this.setTabNotification(tabId)
+      }
+    }, this)
 
     // Render initial tab
     this.setActiveTab(this.initialTabId)
@@ -103,7 +115,10 @@ class App {
       const fn = (tab.id === tabId) ? 'add' : 'remove'
       tab._navEl.classList[fn](styles.activeTab)
       tab._wrapEl.classList[fn](styles.activeContent)
+      if (tab.id === tabId) tab._navEl.classList.remove(styles.tabNotify)
     })
+
+    this.activeTab = tabId
 
     return true
   }
@@ -114,7 +129,14 @@ class App {
 
     const fn = (isVisible) ? 'add' : 'remove'
     tab._navEl.classList[fn](styles.visibleTab)
-    tab.wrapEl.classList[fn](styles.visibleContent)
+    tab._wrapEl.classList[fn](styles.visibleContent)
+  }
+
+  setTabNotification(tabId) {
+    if (tabId === this.activeTab) return false
+    const tidx = this.tabDataIds.indexOf(tabId)
+    if (tidx === -1) return false
+    this.tabData[tidx]._navEl.classList.add(styles.tabNotify)
   }
 }
 
