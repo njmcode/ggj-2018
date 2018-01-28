@@ -32,7 +32,8 @@
     background: rgba(0, 0, 0, 0.3) url('assets/closed_lock.png') no-repeat center;
 }
 
-.mediaDetail {
+.mediaDetail,
+.mediaPacket {
     background-color: silver;
     border: 1px solid black;
     margin: 5px;
@@ -60,4 +61,20 @@
 
 .formRow input {
     flex-grow: 1;
+}
+
+.mediaPacket > textarea {
+    min-height: 200px;
+    width: 100%;
+}
+
+.packetHeader {
+    color: red;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.errorMsg {
+    color: red;
+    text-align: center;
 }

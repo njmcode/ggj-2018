@@ -15,9 +15,19 @@ export default `
             <label>Passcode:</label>
             <input type="text" name="passcode">
         </div>
+        <div class="${styles.errorMsg} ${hidden}">
+            <span>Incorrect passcode provided.</span>
+        </div>
         <div class="${styles.formRow}">
             <button id="detail-submit" type="button">Enter</button>
             <button id="detail-cancel" type="button">Cancel</button>
+        </div>
+    </div>
+    <div class="${styles.mediaPacket} ${hidden}">
+        <h1 class="${styles.packetHeader}">Information Packet Uncovered</h1>
+        <textarea id="infoPacket"></textarea>
+        <div class="${styles.formRow}">
+            <button id="packet-transmit" type="button">Send</button>
         </div>
     </div>
 </div>
