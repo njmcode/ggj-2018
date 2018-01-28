@@ -11,7 +11,8 @@ import {
   EVT_PUZZLE_DATA_SENT,
   EVT_TAB_NOTIFY,
   EVT_SEND_INITIAL_PHOTOS,
-  EVT_FAILGAME
+  EVT_FAILGAME,
+  EVT_PLAY_SOUND
 } from 'data/events'
 
 /**

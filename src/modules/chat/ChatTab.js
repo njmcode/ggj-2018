@@ -3,7 +3,8 @@ import {
   EVT_MESSAGE_RECEIVED,
   EVT_CHOICES_RECEIVED,
   EVT_CHOICE_SELECTED,
-  EVT_TAB_NOTIFY
+  EVT_TAB_NOTIFY,
+  EVT_PLAY_SOUND
 } from 'data/events'
 import styles from './chat.css'
 
@@ -73,6 +74,8 @@ class ChatTab {
     this.messageLog.push(msg);
     // Scroll to bottom of panel
     this.convoPanelEl.scrollTop = this.msgPanelEl.scrollHeight
+
+    this.emitter.dispatch(EVT_PLAY_SOUND, 'not1')
   }
 
   displayChoices(options) {

@@ -3,12 +3,15 @@ import template from './template'
 import styles from './style.css'
 
 import Emitter from 'core/Emitter'
+import SoundPlayer from 'core/SoundPlayer'
+
 import GameState from './GameState'
 import ChatTab from 'modules/chat/ChatTab'
 import MediaTab from 'modules/media/MediaTab'
 
 import { CHAT_A, CHAT_B } from 'data/gamescript'
-import { EVT_TAB_NOTIFY } from 'data/events'
+import { EVT_TAB_NOTIFY, EVT_PLAY_SOUND } from 'data/events'
+import sounds from 'data/sounds'
 
 /**
  * Main app UI class.
@@ -48,6 +51,8 @@ class App {
     ]
     this.tabDataIds = this.tabData.map(td => td.id)
 
+    this.soundplayer = new SoundPlayer(sounds)
+    console.log(this.soundplayer)
     this.emitter = new Emitter()
     this.gamestate = new GameState(this.emitter)
 
@@ -103,6 +108,11 @@ class App {
       tdata.module.init(tdata.id, tabContentEl, this.emitter)
     })
 
+    // Bind sound event
+    this.emitter.bind(EVT_PLAY_SOUND, (soundId) => {
+      this.soundplayer.play(soundId)
+    }, this)
+
     // Show notification on tabs if not the current one
     this.emitter.bind(EVT_TAB_NOTIFY, (tabId) => {
       if (tabId !== this.activeTab) {
@@ -113,6 +123,10 @@ class App {
     // Render initial tab
     this.setActiveTab(this.initialTabId)
     this.gamestate.init()
+
+    setTimeout(() => {
+      this.emitter.dispatch(EVT_PLAY_SOUND, 'appstart')
+    }, 1000)
   }
 
   setActiveTab(tabId) {
