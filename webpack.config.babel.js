@@ -51,7 +51,8 @@ const baseConfig = {
       {
         test: [
           /manifest.json/,
-          /favicon/
+          /favicon/,
+          /wirerun64.html/
         ],
         include: SRC_PATH,
         use: [{
