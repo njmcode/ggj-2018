@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
     "build": "webpack -p",
-    "testserve": "webpack -p && node server/index.js"
+    "testserve": "npm run build && node server/index.js",
+    "deploy": "./deploy.sh"
   },
   "repository": {
     "type": "git",
