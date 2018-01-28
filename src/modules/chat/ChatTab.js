@@ -4,7 +4,8 @@ import {
   EVT_CHOICES_RECEIVED,
   EVT_CHOICE_SELECTED,
   EVT_TAB_NOTIFY,
-  EVT_PLAY_SOUND
+  EVT_PLAY_SOUND,
+  EVT_IMPATIENT_TAP
 } from 'data/events'
 import styles from './chat.css'
 
@@ -44,6 +45,10 @@ class ChatTab {
 
     this.emitter.bind(EVT_CHOICES_RECEIVED,
         this.handleIncomingMessage, this)
+    
+    this.msgPanelEl.addEventListener('click', () => {
+      this.emitter.dispatch(EVT_IMPATIENT_TAP);
+    });
   }
 
   handleIncomingMessage(msg) {

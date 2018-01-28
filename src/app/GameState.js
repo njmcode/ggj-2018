@@ -12,7 +12,8 @@ import {
   EVT_TAB_NOTIFY,
   EVT_SEND_INITIAL_PHOTOS,
   EVT_FAILGAME,
-  EVT_PLAY_SOUND
+  EVT_PLAY_SOUND,
+  EVT_IMPATIENT_TAP
 } from 'data/events'
 
 /**
@@ -35,6 +36,13 @@ class GameState {
     this.reader = new ScriptReader(gamescript)
 
     this.initialChapter = 'intro1'
+    this.puzzleChapters = [
+      'firstpuzzlesent',
+      'strangepackage',
+      'readfile',
+      '',
+      'tempwin'
+    ]
 
     this.choiceHistory = []
 
@@ -56,7 +64,8 @@ class GameState {
         [EVT_PUZZLE_FAIL]: 'handlePuzzleFail',
         [EVT_SEND_INITIAL_PHOTOS]: 'handleFirstPhotos',
         [EVT_ADVANCE_GAME_STATE]: 'advance',
-        [EVT_FAILGAME]: 'handleGameOver'
+        [EVT_FAILGAME]: 'handleGameOver',
+        [EVT_IMPATIENT_TAP]: 'handleImpatientPlayer'
       }
     }
 
@@ -90,16 +99,18 @@ class GameState {
 
     if (msg) {
       if (msg.event) {
-        console.info('GameState:event bound to message', msg.event)
         this.emitter.dispatch(msg.event)
       }
       if (msg.choices) {
         this.emitter.dispatch(EVT_CHOICES_RECEIVED, msg)
       } else {
-        setTimeout(() => {
+        this.msgFn = () => {
+          clearTimeout(this.msgTimeout);
+          this.msgFn = () => {};
           this.emitter.dispatch(EVT_MESSAGE_RECEIVED, msg)
           this.advance()
-        }, (window.quickPlay ? 1000 : 3000)) // TODO: calc time to display message
+        };
+        this.msgTimeout = setTimeout(this.msgFn, (window.quickPlay ? 1000 : 3000)) // TODO: calc time to display message
       }
     }
   }
@@ -132,7 +143,6 @@ class GameState {
 
   // When phots are first sent/Media tab revealed
   handleFirstPhotos() {
-    console.log('handleFirstPhotos')
     this.emitter.dispatch(EVT_TAB_NOTIFY, 'Media')
   }
 
@@ -163,9 +173,23 @@ class GameState {
     if (window.quickPlay) {
       this.sendQuickplayNotification(`Puzzles remaining: ${this.totalPuzzles - this.getCompletedPuzzleCount()}`)
     } else  {
-      if (this.getSentPuzzleDataCount() === 1) {
+      /*if (this.getSentPuzzleDataCount() === 1) {
         this.reader.startChapter('firstpuzzlesent')
         this.advance()
+      }
+      else if (this.getSentPuzzleDataCount() === 2) {
+        this.reader.startChapter('strangepackage');
+        this.advance();
+      }
+      else*/
+      const puzzleIndex = this.getSentPuzzleDataCount() - 1;
+      if (puzzleIndex === this.totalPuzzles) {
+        this.reader.startChapter('tempwin');
+        this.advance();
+      }
+      else if (this.puzzleChapters[puzzleIndex] !== '') {
+        this.reader.startChapter(this.puzzleChapters[puzzleIndex]);
+        this.advance();
       }
     }
   }
@@ -183,6 +207,14 @@ class GameState {
     } else if (this.puzzleAttemptsLeft === 0) {
       this.reader.startChapter('failstate3')
       this.advance()
+    }
+  }
+
+  // Allow players to advance the dialog quicker
+  handleImpatientPlayer() {
+    if (this.msgTimeout) {
+      clearTimeout(this.msgTimeout);
+      this.msgFn();
     }
   }
 
