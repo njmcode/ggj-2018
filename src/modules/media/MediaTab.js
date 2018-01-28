@@ -1,22 +1,14 @@
 import styles from './media.css';
 import { hidden as hiddenCls } from 'shared/main.css';
 import template from './template';
-import photoList from './files';
+import mediaList from 'data/media';
 import {
   EVT_PUZZLE_FAIL,
   EVT_PUZZLE_SUCCESS,
   EVT_SEND_INITIAL_PHOTOS,
   EVT_PUZZLE_DATA_SENT
 } from 'data/events';
-import infoPackets from './info_packets';
 
-const passcodes = [
-  '123456',
-  '987654',
-  '456789',
-  '654321',
-  '123789'
-];
 
 class MediaTab {
   constructor() {
@@ -53,13 +45,13 @@ class MediaTab {
   }
 
   releasePhoto (index) {
-    if (index >= photoList.length) {
+    if (index >= mediaList.length) {
         return;
     }
 
     const imgContainer = this.mediaPanel.querySelector(`[data-index="${index}"]`);
     const imgEl = document.createElement('img');
-    imgEl.src = photoList[index];
+    imgEl.src = mediaList[index].url;
     imgEl.dataset['index'] = index;
     imgEl.addEventListener('click', () => {
         this.onImageClick(imgEl);
@@ -100,11 +92,11 @@ class MediaTab {
     const passcodeEl = this.mediaDetail.querySelector('[name="passcode"]');
     const index = imgEl.dataset.index;
 
-    if (index >= passcodes.length) {
+    if (index >= mediaList.length) {
       return false;
     }
 
-    if ( passcodeEl.value === passcodes[index] ) {
+    if ( passcodeEl.value === mediaList[index].passcode ) {
       this.unencrypted.push(index);
       this.emitter.dispatch(EVT_PUZZLE_SUCCESS, index);
       this.closeDetails();
@@ -119,7 +111,7 @@ class MediaTab {
   expandPacket (index) {
     // Display the contents of the specified info packet
     const packetEl = this.mediaPacket.querySelector('#infoPacket');
-    packetEl.value = infoPackets[index];
+    packetEl.value = mediaList[index].payload;
     packetEl.dataset.index = index;
     this.mediaPacket.classList.remove(hiddenCls);
   }
