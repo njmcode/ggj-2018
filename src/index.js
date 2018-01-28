@@ -1,6 +1,7 @@
 import 'shared/main.css'
 import './manifest.json'
 import './favicon.gif'
+import './game.html'
 
 import App from './app'
 
