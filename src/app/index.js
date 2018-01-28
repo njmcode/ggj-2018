@@ -36,13 +36,13 @@ class App {
       {
         id: 'ChatB',
         label: '???',
-        visible: true,
+        visible: false,
         module: new ChatTab(CHAT_B)
       },
       {
         id: 'Media',
         label: 'Media',
-        visible: true,
+        visible: false,
         module: new MediaTab()
       }
     ]
@@ -131,19 +131,23 @@ class App {
     return true
   }
 
-  setTabVisibility(idx, isVisible = true) {
+  setTabVisibility(tabId, isVisible = true) {
     const tidx = this.tabDataIds.indexOf(tabId)
-    if (tidx === -1 || !this.tabData[tidx].visible) return false
+    if (tidx === -1) return false
 
     const fn = (isVisible) ? 'add' : 'remove'
-    tab._navEl.classList[fn](styles.visibleTab)
-    tab._wrapEl.classList[fn](styles.visibleContent)
+    this.tabData[tidx]._navEl.classList[fn](styles.visibleTab)
+    this.tabData[tidx]._wrapEl.classList[fn](styles.visibleContent)
+    this.tabData[tidx].visible = isVisible
   }
 
   setTabNotification(tabId) {
     if (tabId === this.activeTab) return false
+
     const tidx = this.tabDataIds.indexOf(tabId)
     if (tidx === -1) return false
+
+    this.setTabVisibility(tabId, true)
     this.tabData[tidx]._navEl.classList.add(styles.tabNotify)
   }
 }
