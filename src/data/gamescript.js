@@ -64,7 +64,6 @@ export default {
       {
         chat: CHAT_A,
         text: 'Unfortunately due to the hack, we don’t have exact geolocations, only images of the locations in question, but they’re all near by and should be easy enough to find, given your familiarity with the area.',
-        event: Events.SEND_INITIAL_PHOTOS
       },
       {
         chat: CHAT_A,
@@ -88,7 +87,8 @@ export default {
       },
       {
         chat: CHAT_A,
-        text: 'Check your photo tab, there you’ll find the 5 remote access points we need you to reconnect to command.'
+        text: 'Check your Media tab, there you’ll find the 5 remote access points we need you to reconnect to command.',
+        event: Events.EVT_SEND_INITIAL_PHOTOS
       },
       {
         chat: CHAT_A,
@@ -143,7 +143,7 @@ export default {
       {
         chat: CHAT_A,
         text: 'Fantastic work Agent 045, please proceed to the next package for more information.',
-        event: Events.FIRST_NEWS_ARTICLE
+        event: Events.EVT_FIRST_NEWS_ARTICLE
       }
     ],
 
@@ -244,7 +244,7 @@ export default {
           },
           {
             text: 'I don’t know you, be gone scum.',
-            event: Events.SECOND_NEWS_ARTICLE,
+            event: Events.EVT_SECOND_NEWS_ARTICLE,
             goto: null,
           }
         ]
@@ -373,7 +373,7 @@ export default {
           },
           {
             text: 'What’s going on?',
-            event: Events.THIRD_NEWS_ARTICLE,
+            event: Events.EVT_THIRD_NEWS_ARTICLE,
             goto: 'goingon',
           }
         ]
@@ -431,7 +431,7 @@ export default {
       {
         chat: CHAT_B,
         text: ' If you’re interested in saving the planet, you’ll do as I say.',
-        event: Events.THIRD_NEWS_ARTICLE,
+        event: Events.EVT_THIRD_NEWS_ARTICLE,
       }
     ],
 
@@ -550,7 +550,7 @@ export default {
       {
         chat: CHAT_B,
         text: 'Agent B: Idiot.',
-        event: Events.FOURTH_NEWS_ARTICLE
+        event: Events.EVT_FOURTH_NEWS_ARTICLE
       }
     ],
 
@@ -578,7 +578,7 @@ export default {
       {
         chat: CHAT_B,
         text: 'Agent R: You’ve doomed us all.',
-        event: Events.FIFTHB_NEWS_ARTICLE
+        event: Events.EVT_FIFTHB_NEWS_ARTICLE
       }
     ],
 
@@ -606,7 +606,7 @@ export default {
       {
         chat: CHAT_B,
         text: 'Agent B: You’ve doomed us all.',
-        event: Events.FIFTHR_NEWS_ARTICLE
+        event: Events.EVT_FIFTHR_NEWS_ARTICLE
       }
     ],
 
@@ -628,7 +628,7 @@ export default {
       {
         chat: CHAT_A,
         text: 'You’ve proven yourself unable to handle this mission. You will not be contacted again.',
-        event: Events.FAILGAME
+        event: Events.EVT_FAILGAME
       }
     ]
   }

@@ -8,7 +8,10 @@ import {
   EVT_PUZZLE_FAIL,
   EVT_PUZZLE_SUCCESS,
   EVT_PUZZLE_FIRST_OPEN,
-  EVT_PUZZLE_DATA_SENT
+  EVT_PUZZLE_DATA_SENT,
+  EVT_TAB_NOTIFY,
+  EVT_SEND_INITIAL_PHOTOS,
+  EVT_FAILGAME
 } from 'data/events'
 
 /**
@@ -44,15 +47,23 @@ class GameState {
         isSent: false
       })
     }
+
+    this.eventBindings = {
+      [EVT_CHOICE_SELECTED]: 'handlePlayerDecision',
+      [EVT_PUZZLE_FIRST_OPEN]: 'handleFirstPuzzleOpen',
+      [EVT_PUZZLE_SUCCESS]: 'handlePuzzleSuccess',
+      [EVT_PUZZLE_DATA_SENT]: 'handlePuzzleDataSent',
+      [EVT_PUZZLE_FAIL]: 'handlePuzzleFail',
+      [EVT_SEND_INITIAL_PHOTOS]: 'handleFirstPhotos',
+      [EVT_ADVANCE_GAME_STATE]: 'advance',
+      [EVT_FAILGAME]: 'handleGameOver'
+    }
   }
 
   init() {
-    this.emitter.bind(EVT_CHOICE_SELECTED, this.handlePlayerDecision, this)
-    this.emitter.bind(EVT_PUZZLE_FIRST_OPEN, this.handleFirstPuzzleOpen, this)
-    this.emitter.bind(EVT_PUZZLE_SUCCESS, this.handlePuzzleSuccess, this)
-    this.emitter.bind(EVT_PUZZLE_DATA_SENT, this.handlePuzzleDataSent, this)
-    this.emitter.bind(EVT_PUZZLE_FAIL, this.handlePuzzleFail, this)
-    this.emitter.bind(EVT_ADVANCE_GAME_STATE, this.advance, this)
+    for (let ev in this.eventBindings) {
+      this.emitter.bind(ev, this[this.eventBindings[ev]], this)
+    }
 
     this.reader.init(this.initialChapter)
     this.advance()
@@ -62,6 +73,10 @@ class GameState {
     const msg = this.reader.getNextMsg()
 
     if (msg) {
+      if (msg.event) {
+        console.info('GameState:event bound to message', msg.event)
+        this.emitter.dispatch(msg.event)
+      }
       if (msg.choices) {
         this.emitter.dispatch(EVT_CHOICES_RECEIVED, msg)
       } else {
@@ -88,6 +103,12 @@ class GameState {
     this.choiceHistory.push(choice)
     this.reader.startChapter(choice.goto)
     this.advance()
+  }
+
+  // When phots are first sent/Media tab revealed
+  handleFirstPhotos() {
+    console.log('handleFirstPhotos')
+    this.emitter.dispatch(EVT_TAB_NOTIFY, 'Media')
   }
 
   // Chat tutorial when first decryption attempted
