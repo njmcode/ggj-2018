@@ -49,10 +49,6 @@ class ChatTab {
     // Only handle messages for this instance
     if (msg.chat !== this.chatID) return false
 
-    // Fire any event the message specifies
-    if (msg.event) {
-      this.emitter.dispatch(msg.event)
-    }
     if (msg.choices) {
       // Render in choices panel if there are some
       this.displayChoices(msg.choices)
@@ -64,6 +60,8 @@ class ChatTab {
   }
 
   displayMessage(msg) {
+    this.clearChoices()
+
     // Render and log a message
     const container = document.createElement('div');
     container.classList.add(

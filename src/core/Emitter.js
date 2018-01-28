@@ -1,4 +1,4 @@
-
+const DEBUG = false
 /**
  * Basic event bus/dispatcher.
  */
@@ -9,6 +9,7 @@ class Emitter {
 
   bind(id, func, ctx) {
     if (!(id in this.events)) {
+      DEBUG && console.log('Emitter:new event', id)
       this.events[id] = []
     }
     this.events[id].push(func.bind(ctx))
@@ -25,7 +26,11 @@ class Emitter {
   }
 
   dispatch(id, ...params) {
-    if (!(id in this.events)) return false
+    if (!(id in this.events)) {
+      DEBUG && console.warn('Emitter:no event found', id)
+      return false
+    }
+    DEBUG && console.log('Emitter:dispatch', id, ...params)
     for (let i = 0, ln = this.events[id].length; i < ln; i++) {
       this.events[id][i](...params)
     }

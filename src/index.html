@@ -38,17 +38,18 @@
         font-family: 'System',sans-serif;
         text-align: center;
         padding: 1em;
-        animation: showSplash 1s steps(2);
+        opacity: 0;
+        animation: showSplash 0.05s steps(2) forwards;
         animation-delay: 1s;
       }
       #splash-inner h3 {
         font-weight: 800;
       }
       @keyframes showSplash {
-        from {
+        0 {
           opacity: 0;
         }
-        to {
+        100% {
           opacity: 1;
         }
       }
