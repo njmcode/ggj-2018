@@ -1,5 +1,6 @@
 import 'shared/main.css'
 import './manifest.json'
+import './favicon.gif'
 
 import App from './app'
 

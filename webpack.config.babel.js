@@ -47,9 +47,12 @@ const baseConfig = {
           },
         }],
       },
-      // Web app manifest file - straight copy via import
+      // Web files - straight copy via import
       {
-        test: /manifest.json/,
+        test: [
+          /manifest.json/,
+          /favicon/
+        ],
         include: SRC_PATH,
         use: [{
           loader: 'file-loader',
@@ -65,7 +68,7 @@ const baseConfig = {
     new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin({
       template: path.join(SRC_PATH, 'index.html'),
-      filename: 'index.html',
+      filename: 'index.html'
     }),
   ],
   resolve: {
