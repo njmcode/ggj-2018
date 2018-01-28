@@ -77,6 +77,7 @@ class MediaTab {
 
   closeDetails () {
     // Close the detailed photo view
+    this.mediaDetail.querySelector('[name="passcode"]').value = '';
     this.mediaDetail.removeChild(this.mediaDetail.firstChild);
     this.mediaDetail.querySelector(`.${styles.errorMsg}`).classList.add(hiddenCls);
     this.mediaDetail.classList.add(hiddenCls);
@@ -94,6 +95,7 @@ class MediaTab {
 
     if ( passcodeEl.value === mediaList[index].passcode ) {
       this.unencrypted.push(index);
+      this.mediaPanel.querySelector(`div[data-index="${index}"]`).classList.add(styles.complete);
       this.emitter.dispatch(EVT_PUZZLE_SUCCESS, index);
       this.closeDetails();
       this.expandPacket(index);
