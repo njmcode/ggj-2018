@@ -8,7 +8,7 @@
     "start": "webpack-dev-server",
     "build": "webpack -p",
     "testserve": "npm run build && node server/index.js",
-    "deploy": "./deploy.sh"
+    "deploy": "npm run build && ./deploy.sh"
   },
   "repository": {
     "type": "git",
