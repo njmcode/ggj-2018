@@ -12,7 +12,8 @@ import {
   EVT_TAB_NOTIFY,
   EVT_SEND_INITIAL_PHOTOS,
   EVT_FAILGAME,
-  EVT_PLAY_SOUND
+  EVT_PLAY_SOUND,
+  EVT_IMPATIENT_TAP
 } from 'data/events'
 
 /**
@@ -56,7 +57,8 @@ class GameState {
         [EVT_PUZZLE_FAIL]: 'handlePuzzleFail',
         [EVT_SEND_INITIAL_PHOTOS]: 'handleFirstPhotos',
         [EVT_ADVANCE_GAME_STATE]: 'advance',
-        [EVT_FAILGAME]: 'handleGameOver'
+        [EVT_FAILGAME]: 'handleGameOver',
+        [EVT_IMPATIENT_TAP]: 'handleImpatientPlayer'
       }
     }
 
@@ -96,10 +98,13 @@ class GameState {
       if (msg.choices) {
         this.emitter.dispatch(EVT_CHOICES_RECEIVED, msg)
       } else {
-        setTimeout(() => {
+        this.msgFn = () => {
+          clearTimeout(this.msgTimeout);
+          this.msgFn = () => {};
           this.emitter.dispatch(EVT_MESSAGE_RECEIVED, msg)
           this.advance()
-        }, (window.quickPlay ? 1000 : 3000)) // TODO: calc time to display message
+        };
+        this.msgTimeout = setTimeout(this.msgFn, (window.quickPlay ? 1000 : 3000)) // TODO: calc time to display message
       }
     }
   }
@@ -187,6 +192,14 @@ class GameState {
     } else if (this.puzzleAttemptsLeft === 0) {
       this.reader.startChapter('failstate3')
       this.advance()
+    }
+  }
+
+  // Allow players to advance the dialog quicker
+  handleImpatientPlayer() {
+    if (this.msgTimeout) {
+      clearTimeout(this.msgTimeout);
+      this.msgFn();
     }
   }
 
