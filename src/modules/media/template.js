@@ -3,7 +3,7 @@ import { hidden } from 'shared/main.css';
 
 let imgContainersTemplate = '';
 
-for (let i = 0; i < 9; i++) {
+for (let i = 0; i < 5; i++) {
     imgContainersTemplate += `<div data-index="${i}" class="${styles.imageThumbnail} ${styles.unavailable}"></div>`
 }
 
@@ -15,9 +15,19 @@ export default `
             <label>Passcode:</label>
             <input type="text" name="passcode">
         </div>
+        <div class="${styles.errorMsg} ${hidden}">
+            <span>Incorrect passcode provided.</span>
+        </div>
         <div class="${styles.formRow}">
             <button id="detail-submit" type="button">Enter</button>
             <button id="detail-cancel" type="button">Cancel</button>
+        </div>
+    </div>
+    <div class="${styles.mediaPacket} ${hidden}">
+        <h1 class="${styles.packetHeader}">Information Packet Uncovered</h1>
+        <textarea id="infoPacket"></textarea>
+        <div class="${styles.formRow}">
+            <button id="packet-transmit" type="button">Send</button>
         </div>
     </div>
 </div>
