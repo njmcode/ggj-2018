@@ -48,12 +48,29 @@
       #splash-inner h3 {
         font-weight: 800;
       }
+      #splash-marquee {
+        overflow-x: hidden;
+        word-wrap: none;
+        white-space: nowrap;
+      }
+      #splash-marquee p {
+        animation: marquee 5s steps(50) infinite;
+        will-change: transform;
+      }
       @keyframes showSplash {
-        0 {
+        0% {
           opacity: 0;
         }
         100% {
           opacity: 1;
+        }
+      }
+      @keyframes marquee {
+        0% {
+          transform: translateX(150%)
+        }
+        100% {
+          transform: translateX(-200%)
         }
       }
     </style>
@@ -66,9 +83,14 @@
 
         </div>
         <h3>ISeekU</h3>
-        <p>(C) 1996 The Reubens. Written for Global Game Jam 2018.</p>
-        <button>
-          Start
+        <div id="splash-marquee">
+            <p>(C) 1996 The Reuben Sandwich. Written for Global Game Jam 2018.</p>
+        </div>
+        <button data-story>
+          Story Mode
+        </button>
+        <button data-quick>
+          Quickplay
         </button>
       </div>
     </div>
