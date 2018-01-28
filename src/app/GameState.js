@@ -167,6 +167,10 @@ class GameState {
         this.reader.startChapter('firstpuzzlesent')
         this.advance()
       }
+      else if (this.getSentPuzzleDataCount() === this.totalPuzzles) {
+        this.reader.startChapter('tempwin');
+        this.advance();
+      }
     }
   }
 
