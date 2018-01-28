@@ -41,6 +41,7 @@
     position: absolute;
     top: 0;
     width: calc(100% - 10px);
+    z-index: 5;
 }
 
 .mediaDetail > img {
@@ -52,7 +53,7 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .formRow label {
@@ -77,4 +78,24 @@
 .errorMsg {
     color: red;
     text-align: center;
+}
+
+.complete::before {
+    background: url('assets/green_tick.gif') no-repeat;
+    background-size: cover;
+    content: '';
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.monochrome {
+    background-color: #000000;
+    color: #00ff00;
+    font-family: monospace;
+    font-size: 1.5em;
 }

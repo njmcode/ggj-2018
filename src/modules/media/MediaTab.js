@@ -71,20 +71,21 @@ class MediaTab {
 
   expandDetails (imgEl) {
     // Expand the detailed photo view
-    this.mediaDetail.insertBefore(imgEl.cloneNode(false), this.mediaDetail.firstChild);
+    this.mediaDetail.appendChild(imgEl.cloneNode(false));
     this.mediaDetail.classList.remove(hiddenCls);
   }
 
   closeDetails () {
     // Close the detailed photo view
-    this.mediaDetail.removeChild(this.mediaDetail.firstChild);
+    this.mediaDetail.querySelector('[name="passcode"]').value = '';
+    this.mediaDetail.removeChild(this.mediaDetail.lastChild);
     this.mediaDetail.querySelector(`.${styles.errorMsg}`).classList.add(hiddenCls);
     this.mediaDetail.classList.add(hiddenCls);
   }
 
   checkPasscode () {
     // If correct, close detail view and pass control to puzzle
-    const imgEl = this.mediaDetail.firstChild;
+    const imgEl = this.mediaDetail.lastChild;
     const passcodeEl = this.mediaDetail.querySelector('[name="passcode"]');
     const index = imgEl.dataset.index;
 
@@ -94,6 +95,7 @@ class MediaTab {
 
     if ( passcodeEl.value === mediaList[index].passcode ) {
       this.unencrypted.push(index);
+      this.mediaPanel.querySelector(`div[data-index="${index}"]`).classList.add(styles.complete);
       this.emitter.dispatch(EVT_PUZZLE_SUCCESS, index);
       this.closeDetails();
       this.expandPacket(index);
