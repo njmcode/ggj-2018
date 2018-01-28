@@ -42,7 +42,7 @@ class App {
       {
         id: 'Media',
         label: 'Media',
-        visible: false,
+        visible: window.quickPlay,
         module: new MediaTab()
       }
     ]
