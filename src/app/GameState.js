@@ -38,7 +38,27 @@ class GameState {
     this.choiceHistory = []
 
     this.puzzleAttemptsLeft = 3
-    this.totalPuzzles = 9
+    this.totalPuzzles = 5
+
+    if (window.isQuickplay) {
+      this.eventBindings = {
+        [EVT_PUZZLE_SUCCESS]: 'handlePuzzleSuccess',
+        [EVT_PUZZLE_FAIL]: 'handlePuzzleFail',
+        [EVT_FAILGAME]: 'handleGameOver'
+      }
+    } else {
+      this.eventBindings = {
+        [EVT_CHOICE_SELECTED]: 'handlePlayerDecision',
+        [EVT_PUZZLE_FIRST_OPEN]: 'handleFirstPuzzleOpen',
+        [EVT_PUZZLE_SUCCESS]: 'handlePuzzleSuccess',
+        [EVT_PUZZLE_DATA_SENT]: 'handlePuzzleDataSent',
+        [EVT_PUZZLE_FAIL]: 'handlePuzzleFail',
+        [EVT_SEND_INITIAL_PHOTOS]: 'handleFirstPhotos',
+        [EVT_ADVANCE_GAME_STATE]: 'advance',
+        [EVT_FAILGAME]: 'handleGameOver'
+      }
+    }
+
     this.puzzleStatus = []
     for (let i = 0; i < this.totalPuzzles; i++) {
       this.puzzleStatus.push({
@@ -47,17 +67,6 @@ class GameState {
         isSent: false
       })
     }
-
-    this.eventBindings = {
-      [EVT_CHOICE_SELECTED]: 'handlePlayerDecision',
-      [EVT_PUZZLE_FIRST_OPEN]: 'handleFirstPuzzleOpen',
-      [EVT_PUZZLE_SUCCESS]: 'handlePuzzleSuccess',
-      [EVT_PUZZLE_DATA_SENT]: 'handlePuzzleDataSent',
-      [EVT_PUZZLE_FAIL]: 'handlePuzzleFail',
-      [EVT_SEND_INITIAL_PHOTOS]: 'handleFirstPhotos',
-      [EVT_ADVANCE_GAME_STATE]: 'advance',
-      [EVT_FAILGAME]: 'handleGameOver'
-    }
   }
 
   init() {
@@ -65,8 +74,13 @@ class GameState {
       this.emitter.bind(ev, this[this.eventBindings[ev]], this)
     }
 
-    this.reader.init(this.initialChapter)
-    this.advance()
+    if (window.quickPlay) {
+      this.sendQuickplayNotification('*** QUICKPLAY MODE ***')
+      this.sendQuickplayNotification(`Puzzles remaining: ${this.totalPuzzles - this.getCompletedPuzzleCount()}`)
+    } else {
+      this.reader.init(this.initialChapter)
+      this.advance()
+    }
   }
 
   advance() {
@@ -86,6 +100,15 @@ class GameState {
         }, 1000) // TODO: calc time to display message
       }
     }
+  }
+
+  /* Quickplay */
+
+  sendQuickplayNotification (text) {
+   this.emitter.dispatch(EVT_MESSAGE_RECEIVED, {
+     text,
+     chat: CHAT_A,
+   })
   }
 
   /** Game logic and advancement callbacks */
@@ -122,9 +145,13 @@ class GameState {
     this.puzzleStatus[puzzleId].isComplete = true
 
     // Instructions after completing first puzzle
-    if (this.getCompletedPuzzleCount() === 1) {
-      this.reader.startChapter('firstpuzzlecomplete')
-      this.advance()
+    if (window.quickPlay) {
+      this.sendQuickplayNotification(`Puzzles remaining: ${this.totalPuzzles - this.getCompletedPuzzleCount()}`)
+    } else {
+      if (this.getCompletedPuzzleCount() === 1) {
+        this.reader.startChapter('firstpuzzlecomplete')
+        this.advance()
+      }
     }
   }
 
