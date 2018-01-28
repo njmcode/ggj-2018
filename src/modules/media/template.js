@@ -25,7 +25,7 @@ export default `
     </div>
     <div class="${styles.mediaPacket} ${hidden}">
         <h1 class="${styles.packetHeader}">Information Packet Uncovered</h1>
-        <textarea id="infoPacket"></textarea>
+        <textarea id="infoPacket" class="${styles.monochrome}"></textarea>
         <div class="${styles.formRow}">
             <button id="packet-transmit" type="button">Send</button>
         </div>
