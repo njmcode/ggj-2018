@@ -17,7 +17,7 @@ body {
   padding: 0;
   overflow: hidden;
   font-family: System, sans-serif;
-  background: black;
+  background: black url('assets/best_viewed.gif') repeat-x left center;
   color: white;
 }
 
