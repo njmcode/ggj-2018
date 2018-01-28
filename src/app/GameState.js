@@ -77,6 +77,7 @@ class GameState {
     if (window.quickPlay) {
       this.sendQuickplayNotification('*** QUICKPLAY MODE ***')
       this.sendQuickplayNotification(`Puzzles remaining: ${this.totalPuzzles - this.getCompletedPuzzleCount()}`)
+      this.emitter.dispatch(EVT_SEND_INITIAL_PHOTOS)
     } else {
       this.reader.init(this.initialChapter)
       this.advance()
@@ -145,9 +146,7 @@ class GameState {
     this.puzzleStatus[puzzleId].isComplete = true
 
     // Instructions after completing first puzzle
-    if (window.quickPlay) {
-      this.sendQuickplayNotification(`Puzzles remaining: ${this.totalPuzzles - this.getCompletedPuzzleCount()}`)
-    } else {
+    if (!window.quickPlay) {
       if (this.getCompletedPuzzleCount() === 1) {
         this.reader.startChapter('firstpuzzlecomplete')
         this.advance()
@@ -160,9 +159,13 @@ class GameState {
     this.puzzleStatus[puzzleId].isSent = true
 
     // Response after first puzzle sent
-    if (this.getSentPuzzleDataCount() === 1) {
-      this.reader.startChapter('firstpuzzlesent')
-      this.advance()
+    if (window.quickPlay) {
+      this.sendQuickplayNotification(`Puzzles remaining: ${this.totalPuzzles - this.getCompletedPuzzleCount()}`)
+    } else  {
+      if (this.getSentPuzzleDataCount() === 1) {
+        this.reader.startChapter('firstpuzzlesent')
+        this.advance()
+      }
     }
   }
 

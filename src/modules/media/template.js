@@ -13,7 +13,7 @@ export default `
     <div class="${styles.mediaDetail} ${hidden}">
         <div class="${styles.formRow}">
             <label>Passcode:</label>
-            <input type="text" name="passcode">
+            <input type="number" name="passcode">
         </div>
         <div class="${styles.errorMsg} ${hidden}">
             <span>Incorrect passcode provided.</span>
