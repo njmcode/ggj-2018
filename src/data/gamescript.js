@@ -149,6 +149,7 @@ export default {
 
     'strangepackage': [
       {
+        chat: CHAT_A,
       	choices: [
           {
             text: 'What is this text about?',
@@ -188,11 +189,31 @@ export default {
         choices: [
           {
             text: 'Understood sir. ',
-            goto: null,
+            goto: 'understoodrisk',
           },
           {
             text: 'Or what?',
             goto: 'yourownrisk',
+          }
+        ]
+      }
+    ],
+
+    'understoodrisk': [
+      {
+        chat: CHAT_B,
+        text: 'Agent 045. Do not trust Agent B.'
+      },
+      {
+        chat: CHAT_B,
+        choices: [
+          {
+            text: 'What to you mean?',
+            goto: 'thewarning'
+          },
+          {
+            text: 'I have no idea what you\'re talking about.',
+            goto: 'thewarning'
           }
         ]
       }
