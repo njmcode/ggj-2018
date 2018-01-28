@@ -1,0 +1,210 @@
+<title>GGJ2018</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div id="game">
+    <div id="state-title">
+      <h1>.:. tranzmitr 64 .:.</h1>
+      <p>HIGH SCORE: <span id="hiscore">0</span></p>
+      <p>PREV SCORE: <span id="prevscore">0</span></p>
+      <button>Start</button>
+    </div>
+    <div id="state-play">
+      <header>
+        <div id="score">0</div>
+        <div id="time">0</div>
+      </header>
+
+      <div id="stream">
+
+      </div>
+      <div id="controls">
+        <button id="but-0">0</button>
+        <button id="but-1">1</button>
+      </div>
+    </div>
+
+</div>
+<style>
+  body { background: black; font-family: monospace; color: cyan; text-align: center }
+  #game {
+    width: 300px;
+    height: 300px;
+    border: 1px solid #333;
+    background: #000008;
+    margin: 10px auto;
+    box-shadow: inset 0 0 10px lightblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  h1 {
+    font-size: 20px;
+    animation: titleflash 0.1s infinite ease alternate;
+    text-shadow: 0 0 10px cyan;
+  }
+  @keyframes titleflash {
+    0% {
+      color: magenta;
+    }
+    50% {
+      color: cyan;
+    }
+    100% {
+      color: white;
+    }
+  }
+  button {
+    -webkit-appearance: none;
+    appearance: none;
+    background: black;
+    padding: 10px;
+    border: 2px solid #ff0099;
+    box-shadow: inset 0 0 10px magenta;
+    font-family: monospace;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  #state-play {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: stretch;
+    height: 100%;
+    width: 100%;
+  }
+  #state-play header {
+
+  }
+  #state-play header div {
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+  }
+  #controls button {
+    width: 100px;
+    font-size: 20px;
+  }
+  #stream {
+    flex-grow: 1;
+    flex-basis: 100%;
+    height: 200px;
+    line-height: 100px;
+    font-size: 50px;
+  }
+  #stream .current {
+    background-color: magenta;
+  }
+</style>
+<script>
+  console.clear();
+var $ = function $(sel) {
+  return document.querySelector(sel);
+};
+var TOTAL_TIME = 20 * 1000;
+var STREAM_SIZE = 8;
+var stream = [];
+
+console.log('stream', stream);
+var types = [{
+  color: 'magenta',
+  label: '0'
+}, {
+  color: 'cyan',
+  label: '1'
+}];
+
+var hiscore = 0;
+var score = 0;
+
+var titleEl = $('#state-title');
+var playEl = $('#state-play');
+console.log(titleEl, playEl);
+var startBut = $('#state-title button');
+var scoreEl = $('#score');
+var timeEl = $('#time');
+var hiScoreEl = $('#hiscore');
+var prevScoreEl = $('#prevscore');
+var streamEl = $('#stream');
+var but0 = $('#but-0');
+var but1 = $('#but-1');
+
+function renderStream() {
+  console.log('stream', stream);
+  streamEl.innerHTML = '';
+  stream.forEach(function (bit, idx) {
+    var item = document.createElement('span');
+    item.classList.add('bit-' + bit);
+    item.textContent = bit;
+    if (idx === 0) item.classList.add('current');
+    streamEl.append(item);
+  });
+}
+
+function getRandomBit() {
+  return Math.random() > 0.5 ? 1 : 0;
+}
+
+function handleInput(bit) {
+  var currentBit = stream[0];
+  if (bit !== currentBit) {
+    // TODO: game over
+    doState('title');
+    return false;
+  }
+  score += 100;
+  stream.shift();
+  stream[STREAM_SIZE - 1] = getRandomBit();
+  renderStream();
+}
+
+var interval = null;
+var startTime = void 0,
+    currentTime = void 0;
+var state = 'title';
+
+function doState(stateID) {
+  switch (stateID) {
+    case 'title':
+      if (score > hiscore) hiscore = score;
+      hiScoreEl.textContent = hiscore;
+      prevScoreEl.textContent = score;
+      titleEl.style.display = 'block';
+      playEl.style.display = 'none';
+      state = 'title';
+      clearInterval(interval);
+      break;
+    case 'play':
+      score = 0;
+      for (var i = 0; i < STREAM_SIZE; i++) {
+        stream[i] = getRandomBit();
+      }
+      renderStream();
+      startTime = Date.now();
+      interval = setInterval(function () {
+        var timeRemaining = TOTAL_TIME - (Date.now() - startTime);
+        if (timeRemaining <= 0) doState('title');
+        timeEl.textContent = Math.ceil(timeRemaining / 1000);
+      }, 100);
+      titleEl.style.display = 'none';
+      playEl.style.display = 'block';
+      state = 'play';
+      break;
+  }
+}
+
+startBut.addEventListener('click', function (e) {
+  doState('play');
+}, false);
+but0.addEventListener('click', function (e) {
+  handleInput(0);
+}, false);
+but1.addEventListener('click', function (e) {
+  handleInput(1);
+}, false);
+
+doState('title');
+</script>
