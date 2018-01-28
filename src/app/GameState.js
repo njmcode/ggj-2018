@@ -36,6 +36,13 @@ class GameState {
     this.reader = new ScriptReader(gamescript)
 
     this.initialChapter = 'intro1'
+    this.puzzleChapters = [
+      'firstpuzzlesent',
+      'strangepackage',
+      'readfile',
+      '',
+      'tempwin'
+    ]
 
     this.choiceHistory = []
 
@@ -92,7 +99,6 @@ class GameState {
 
     if (msg) {
       if (msg.event) {
-        console.info('GameState:event bound to message', msg.event)
         this.emitter.dispatch(msg.event)
       }
       if (msg.choices) {
@@ -137,7 +143,6 @@ class GameState {
 
   // When phots are first sent/Media tab revealed
   handleFirstPhotos() {
-    console.log('handleFirstPhotos')
     this.emitter.dispatch(EVT_TAB_NOTIFY, 'Media')
   }
 
@@ -168,12 +173,22 @@ class GameState {
     if (window.quickPlay) {
       this.sendQuickplayNotification(`Puzzles remaining: ${this.totalPuzzles - this.getCompletedPuzzleCount()}`)
     } else  {
-      if (this.getSentPuzzleDataCount() === 1) {
+      /*if (this.getSentPuzzleDataCount() === 1) {
         this.reader.startChapter('firstpuzzlesent')
         this.advance()
       }
-      else if (this.getSentPuzzleDataCount() === this.totalPuzzles) {
+      else if (this.getSentPuzzleDataCount() === 2) {
+        this.reader.startChapter('strangepackage');
+        this.advance();
+      }
+      else*/
+      const puzzleIndex = this.getSentPuzzleDataCount() - 1;
+      if (puzzleIndex === this.totalPuzzles) {
         this.reader.startChapter('tempwin');
+        this.advance();
+      }
+      else if (this.puzzleChapters[puzzleIndex] !== '') {
+        this.reader.startChapter(this.puzzleChapters[puzzleIndex]);
         this.advance();
       }
     }
