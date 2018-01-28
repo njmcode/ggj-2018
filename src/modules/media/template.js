@@ -3,7 +3,7 @@ import { hidden } from 'shared/main.css';
 
 let imgContainersTemplate = '';
 
-for (let i = 0; i < 9; i++) {
+for (let i = 0; i < 5; i++) {
     imgContainersTemplate += `<div data-index="${i}" class="${styles.imageThumbnail} ${styles.unavailable}"></div>`
 }
 

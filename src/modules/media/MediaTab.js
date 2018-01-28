@@ -38,10 +38,6 @@ class MediaTab {
         this.releasePhoto(x);
       }
     }, this);
-    /*setTimeout(() => {
-        this.releasePhoto(0);
-        this.releasePhoto(1);
-    }, 0);*/
   }
 
   releasePhoto (index) {
