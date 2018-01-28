@@ -5,7 +5,7 @@ import photoList from './files';
 import {
   EVT_PUZZLE_FAIL,
   EVT_PUZZLE_SUCCESS,
-  EVT_GAME_SEND_PHOTOS,
+  EVT_SEND_INITIAL_PHOTOS,
   EVT_PUZZLE_DATA_SENT
 } from 'data/events';
 import infoPackets from './info_packets';
@@ -27,6 +27,7 @@ class MediaTab {
     this.id = moduleId;
     this.emitter = emitter;
     this.unencrypted = [];
+    this.transmittedPackets = [];
 
     this.mediaPanel = el.querySelector(`.${styles.mediaPanel}`) || el;
     this.mediaDetail = el.querySelector(`.${styles.mediaDetail}`);
@@ -40,15 +41,15 @@ class MediaTab {
     this.mediaPacket.querySelector('#packet-transmit').addEventListener('click', () => {
       this.transmitPacket()
     })
-    this.emitter.bind(EVT_GAME_SEND_PHOTOS, () => {
+    this.emitter.bind(EVT_SEND_INITIAL_PHOTOS, () => {
       for (let x = 0; x < 5; x++) {
         this.releasePhoto(x);
       }
     }, this);
-    setTimeout(() => {
+    /*setTimeout(() => {
         this.releasePhoto(0);
         this.releasePhoto(1);
-    }, 0);
+    }, 0);*/
   }
 
   releasePhoto (index) {
@@ -70,7 +71,7 @@ class MediaTab {
 
   onImageClick (imgEl) {
     const index = imgEl.dataset.index;
-    if (this.unencrypted.indexOf(index) >= 0) {
+    if (this.unencrypted.includes(index)) {
       // User has entered the correct passcode already, skip to the info packet
       this.expandPacket(index);
     }
@@ -133,7 +134,11 @@ class MediaTab {
   transmitPacket () {
     const packetEl = this.mediaPacket.querySelector('#infoPacket');
     const index = packetEl.dataset.index;
-    this.emitter.dispatch(EVT_PUZZLE_DATA_SENT, index);
+
+    if (!this.transmittedPackets.includes(index)) {
+      this.emitter.dispatch(EVT_PUZZLE_DATA_SENT, index);
+      this.transmittedPackets.push(index);
+    }
     this.closePacket();
   }
 };
