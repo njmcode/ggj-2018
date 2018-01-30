@@ -66,6 +66,10 @@
         animation: showSplash 0.05s steps(2) forwards;
         animation-delay: 1s;
       }
+      #custom-game h4 {
+        color: blue;
+        margin-bottom: 0;
+      }
       #splash-inner h3 {
         font-weight: 800;
       }
@@ -104,15 +108,18 @@
 
         </div>
         <h3>ISeekU</h3>
+        <div id="custom-game"></div>
         <div id="splash-marquee">
             <p>(C) 1996 The Reuben Sandwich. Written for Global Game Jam 2018.</p>
         </div>
-        <button data-story>
-          Story Mode
-        </button>
-        <button data-quick>
-          Quickplay
-        </button>
+        <div id="start-buttons">
+          <button data-story>
+            Story Mode
+          </button>
+          <button data-quick>
+            Quickplay
+          </button>
+        </div>
       </div>
     </div>
     <div id="splash-footer" onclick="window.location.href='game.html'"></div>

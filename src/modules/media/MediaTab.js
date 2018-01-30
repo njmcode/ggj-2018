@@ -1,7 +1,7 @@
 import styles from './media.css';
 import { hidden as hiddenCls } from 'shared/main.css';
 import template from './template';
-import mediaList from 'data/media';
+import defaultMediaList from 'data/media';
 import {
   EVT_PUZZLE_FAIL,
   EVT_PUZZLE_SUCCESS,
@@ -9,6 +9,7 @@ import {
   EVT_PUZZLE_DATA_SENT
 } from 'data/events';
 
+let mediaList
 
 class MediaTab {
   constructor() {
@@ -16,6 +17,8 @@ class MediaTab {
   }
 
   init (moduleId, el, emitter) {
+    mediaList = (window.customData) ? window.customData.images : defaultMediaList
+
     this.id = moduleId;
     this.emitter = emitter;
     this.unencrypted = [];
