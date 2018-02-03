@@ -40,7 +40,7 @@ class GameState {
       'firstpuzzlesent',
       'strangepackage',
       'readfile',
-      '',
+      'helloagents',
       'tempwin'
     ]
 

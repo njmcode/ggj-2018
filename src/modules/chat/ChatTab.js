@@ -72,7 +72,7 @@ class ChatTab {
     const container = document.createElement('div');
     container.classList.add(
       styles.msg,
-      (msg.isPlayer) ? styles.player : styles[msg.chat]
+      (msg.speaker) ? styles[msg.speaker] : styles[msg.chat]
     );
     container.textContent = msg.text;
     this.msgPanelEl.appendChild(container);
@@ -98,7 +98,7 @@ class ChatTab {
         this.displayMessage({
           chat: this.chatID,
           text: opt.text,
-          isPlayer: true,
+          speaker: 'player'
         })
         this.clearChoices()
         this.emitter.dispatch(EVT_CHOICE_SELECTED, opt)
