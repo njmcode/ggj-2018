@@ -11,24 +11,23 @@
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  background: white;
-  color: black;
+  background: black;
 }
 
 /* Header */
 
 .appHeader {
-  background: winBlue url('assets/vert-grad-bar.png') repeat-x top center;
+  background: var(--app-title-bg) url('assets/vert-grad-bar.png') repeat-x top center;
   background-blend-mode: overlay;
   padding: 4px;
-  border: 2px outset silver;
+  border: 2px outset var(--app-title-border);
   flex-shrink: 0;
   flex-grow: 0;
   position: relative;
 }
 
 .appHeader h1 {
-  color: white;
+  color: var(--app-title-text);
   font-weight: bold;
   font-size: 11px;
   padding-left: 20px;
@@ -47,7 +46,7 @@
 /* Nav */
 
 .tabNav {
-  background: blue;
+  background: var(--nav-bg);
 }
 
 .tabNav button {
@@ -62,7 +61,7 @@
 }
 
 .tabNav button.activeTab {
-  background-color: yellow;
+  background-color: var(--nav-tab-active);
 }
 .tabNav button.visibleTab {
   display: inline-block;
@@ -74,7 +73,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: red;
+  background: var(--nav-tab-notify);
   top: 0;
   right: 0;
 }
@@ -88,7 +87,6 @@
 /* Content */
 
 .appTabWindow {
-  background: silver;
   display: block;
   flex-grow: 1;
   position: relative;
@@ -109,10 +107,10 @@
 /* Footer */
 
 .appFooter {
-  background: lightslategray;
-  color: black;
+  background: var(--footer-bg);
+  color: var(--footer-text);
   font-size: 11px;
-  border: 2px outset silver;
+  border: 2px outset var(--footer-border);
   flex-grow: 0;
   flex-shrink: 0;
 }

@@ -1,5 +1,9 @@
 @value chatBlue, chatGreen, chatRed from 'shared/colors.css';
 
+:root {
+    --player-color: chatGreen;
+}
+
 .conversationPanel {
     display: block;
     height: 100%;
@@ -8,7 +12,7 @@
 }
 
 .msgPanel {
-    background: silver;
+    background: var(--chat-tab-bg);
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -17,13 +21,13 @@
 }
 
 .msg {
-    border: 1px solid chatBlue;
     border-radius: 10px;
     margin-bottom: 3px;
     padding: 10px;
     width: 85%;
     max-width: 300px;
     background: white;
+    color: var(--chat-msg-text);
     will-change: transform;
     animation: reveal 0.3s steps(4);
 }
@@ -44,21 +48,21 @@
 }
 
 .agentA {
-    background-color: chatBlue;
+    background-color: var(--chat-msg-1);
 }
 
 .agentB {
-    background-color: chatRed;
+    background-color: var(--chat-msg-2);
 }
 
 .player {
     align-self: flex-end;
-    background-color: chatGreen;
+    background-color: var(--chat-msg-player);
     border-bottom-right-radius: 0;
 }
 
 .choicePanel {
-    background: blue;
+    background: var(--chat-choice-bg);
     bottom: 0;
     display: flex;
     flex-flow: column nowrap;
