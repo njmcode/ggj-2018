@@ -62,6 +62,13 @@ class App {
   }
 
   start() {
+    // Handle custom skin colors if they exist
+    if (window.customData && window.customData.skin) {
+      for (let prop in window.customData.skin) {
+        document.body.style.setProperty(`--${prop}`, window.customData.skin[prop])
+      }
+    }
+
     // Render app shell
     this.el = dom(template)
     this.appEl.innerHTML = ''
