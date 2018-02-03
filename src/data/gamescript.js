@@ -319,7 +319,7 @@ export default {
       },
       {
         chat: CHAT_B,
-        text: 'Don\'t blindly do what they tell you too.'
+        text: 'Don\'t blindly do what they tell you to.'
       },
       {
         chat: CHAT_B,
@@ -460,33 +460,33 @@ export default {
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: So, here you are.'
+        text: 'So, here you are.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: I guess you found me.'
+        text: 'I guess you found me.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: We\'ve tracked you Agent Smith. You\'ve nowhere to hide.'
+        text: 'We\'ve tracked you Agent Smith. You\'ve nowhere to hide.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: We won\'t let you get a hold of the info packet.'
+        text: 'We won\'t let you get a hold of the info packet.'
       },
       {
        	chat: CHAT_B,
         choices: [
           {
             text: 'You\'re damn right!',
-            goto: 'agenta1',
+            goto: 'agentb1',
           },
           {
             text: 'I don\'t think so.',
-            goto: 'agentb1',
+            goto: 'agenta1',
           }
         ]
       }
@@ -496,139 +496,163 @@ export default {
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: Ha!'
+        text: 'Ha!'
       },
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: 045… I thought you were better than this.'
+        text: '045… I thought you were better than this.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: You\'re signing your own death warrant.'
+        text: 'You\'re signing your own death warrant.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: Don\'t be ridiculous.'
+        text: 'Don\'t be ridiculous.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: Get to the last info point Agent 045.'
+        text: 'Get to the last info point Agent 045.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: Then we can annihilate this scum.'
+        text: 'Then we can annihilate this scum.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: There\'s still time.'
+        text: 'There\'s still time.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: I hope that when the time comes, you\'ll make the right choice.'
+        text: 'I hope that when the time comes, you\'ll make the right choice.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: Idiot. '
+        text: 'Idiot. '
       }
     ],
 
-    'agentr1': [
+    'agentb1': [
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: Excuse me??'
+        text: 'Excuse me??'
       },
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: I think you heard them Jones.'
+        text: 'I think you heard them Jones.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: They won\'t be helping you anymore.'
+        text: 'They won\'t be helping you anymore.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: Are you an idiot?!'
+        text: 'Are you an idiot?!'
       },
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: You\'ll be helping a physcopath!'
+        text: 'You\'ll be helping a physcopath!'
       },
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: This will start world war 3!'
+        text: 'This will start world war 3!'
       },
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: Don\'t waste your breath Jones. They\'ve made their choice.'
+        text: 'Don\'t waste your breath Jones. They\'ve made their choice.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: We won\'t start a war, we\'ll be ending it.'
+        text: 'We won\'t start a war, we\'ll be ending it.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: I beg of you, please. You still have time to change your mind.'
+        text: 'I beg of you, please. You still have time to change your mind.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: When the time comes, send the pack to me.'
+        text: 'When the time comes, send the pack to me.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: Idiot.',
+        text: 'Idiot.',
         event: Events.EVT_FOURTH_NEWS_ARTICLE
+      }
+    ],
+
+    'finalpacket': [
+      {
+        chat: CHAT_A,
+        text: 'Excellent work, Agent 045! That\'s the final packet.'
+      },
+      {
+        chat: CHAT_A,
+        text: 'Forward it to me now, and we can end this quickly!'
+      },
+      {
+        chat: CHAT_A,
+        choices: [
+          {
+            text: 'Roger that. [TRANSMIT TO JONES]',
+            goto: 'bluepacket'
+          },
+          {
+            text: 'No. [TRANSMIT TO SMITH]',
+            goto: 'redpacket'
+          }
+        ]
       }
     ],
 
     'bluepacket': [
       {
-        chat: CHAT_B,
+        chat: CHAT_A,
         speaker: 'agentA',
-        text: 'Agent Jones: Well done Agent 045, you\'ve made the correct decision.'
+        text: 'Well done Agent 045, you\'ve made the correct decision.'
       },
       {
-        chat: CHAT_B,
+        chat: CHAT_A,
         speaker: 'agentB',
-        text: 'Agent Smith: Oh god. What have you done.'
+        text: 'Oh god. What have you done.'
       },
       {
-        chat: CHAT_B,
+        chat: CHAT_A,
         speaker: 'agentA',
-        text: 'Agent Jones: Exactly what he was meant to, Smith.'
+        text: 'Exactly what he was meant to, Smith.'
       },
       {
-        chat: CHAT_B,
+        chat: CHAT_A,
         speaker: 'agentA',
-        text: 'Agent Jones: I hope you\'ve enjoyed your time on this earth.'
+        text: 'I hope you\'ve enjoyed your time on this earth.'
       },
       {
-        chat: CHAT_B,
+        chat: CHAT_A,
         speaker: 'agentA',
-        text: 'Agent Jones: You will be rewarded Agent 045.'
+        text: 'You will be rewarded Agent 045.'
       },
       {
-        chat: CHAT_B,
+        chat: CHAT_A,
         speaker: 'agentB',
-        text: 'Agent Smith: You\'ve doomed us all.',
+        text: 'You\'ve doomed us all.',
         event: Events.EVT_FIFTHB_NEWS_ARTICLE
       }
     ],
@@ -637,32 +661,32 @@ export default {
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: Well done Agent 045, you\'ve made the correct decision.'
+        text: 'Well done Agent 045, you\'ve made the correct decision.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: Oh god. What have you done.'
+        text: 'Oh god. What have you done.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: Exactly what he was meant to, Jones.'
+        text: 'Exactly what he was meant to, Jones.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: I hope you\'ve enjoyed your time on this earth.'
+        text: 'I hope you\'ve enjoyed your time on this earth.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentB',
-        text: 'Agent Smith: You will be rewarded Agent 045.'
+        text: 'You will be rewarded Agent 045.'
       },
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Agent Jones: You\'ve doomed us all.',
+        text: 'You\'ve doomed us all.',
         event: Events.EVT_FIFTHR_NEWS_ARTICLE
       }
     ],

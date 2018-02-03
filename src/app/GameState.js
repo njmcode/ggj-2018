@@ -41,7 +41,7 @@ class GameState {
       'strangepackage',
       'readfile',
       'helloagents',
-      'tempwin'
+      'finalpacket'
     ]
 
     this.choiceHistory = []
