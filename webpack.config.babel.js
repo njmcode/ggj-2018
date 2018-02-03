@@ -76,7 +76,10 @@ const baseConfig = {
     modules: [
       'node_modules',
       SRC_PATH,
-    ]
+    ],
+    alias: {
+      'request$': 'xhr',
+    }
   },
   devtool: 'source-map',
   output: {

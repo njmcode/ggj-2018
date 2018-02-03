@@ -8,6 +8,26 @@
     <link rel="manifest" href="manifest.json">
     <link rel="favicon" href="favicon.gif">
     <style>
+      * {
+        -webkit-font-smoothing: none;
+        font-smoothing: none;
+      }
+      body.crt {
+        filter: blur(0.4px);
+      }
+      body.crt:after {
+        content: '';
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEklEQVQYV2NkgAJGFxeX/yA2AAq8Ac5rxH2lAAAAAElFTkSuQmCC') repeat top center;
+        background-size: 4px;
+        opacity: 0.1;
+        pointer-events: none;
+      }
       img {
         image-rendering:pixelated;
       }
@@ -45,6 +65,10 @@
         opacity: 0;
         animation: showSplash 0.05s steps(2) forwards;
         animation-delay: 1s;
+      }
+      #custom-game h4 {
+        color: blue;
+        margin-bottom: 0;
       }
       #splash-inner h3 {
         font-weight: 800;
@@ -84,17 +108,25 @@
 
         </div>
         <h3>ISeekU</h3>
+        <div id="custom-game"></div>
         <div id="splash-marquee">
             <p>(C) 1996 The Reuben Sandwich. Written for Global Game Jam 2018.</p>
         </div>
-        <button data-story>
-          Story Mode
-        </button>
-        <button data-quick>
-          Quickplay
-        </button>
+        <div id="start-buttons">
+          <button data-story>
+            Story Mode
+          </button>
+          <button data-quick>
+            Quickplay
+          </button>
+        </div>
       </div>
     </div>
     <div id="splash-footer" onclick="window.location.href='game.html'"></div>
+    <script>
+      if ('pointerEvents' in document.documentElement.style) {
+        document.body.classList.add('crt');
+      }
+    </script>
   </body>
 </html>

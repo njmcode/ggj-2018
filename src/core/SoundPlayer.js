@@ -1,8 +1,6 @@
-import { Z_DEFAULT_STRATEGY } from "zlib";
 
 class SoundPlayer {
   constructor(manifest) {
-    console.log('manifest', manifest)
 
     this.sounds = {}
 
