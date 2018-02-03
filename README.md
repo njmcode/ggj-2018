@@ -42,7 +42,7 @@ The JSON file should be in the following format:
       "payload": "Some payload data", // Can be anything
       "passcode": "45367669" // Any unique code number
     },
-    ... // must define exactly 5 images, with the last id being 4
+    ... // must define at least 5 images
   ]
 }
 ```

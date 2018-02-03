@@ -1,7 +1,6 @@
 
 class SoundPlayer {
   constructor(manifest) {
-    console.log('manifest', manifest)
 
     this.sounds = {}
 

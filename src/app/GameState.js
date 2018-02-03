@@ -28,11 +28,14 @@ import {
  *
  * Renders no UI of its own.
  * Uses an Emitter instance passed into it.
+ * Also requires the game location data to be passed in
+ * in order to track progress.
  */
 
 class GameState {
-  constructor(emitter) {
+  constructor(emitter, locationData) {
     this.emitter = emitter
+    this.locationData = locationData
     this.reader = new ScriptReader(gamescript)
 
     this.initialChapter = 'intro1'
@@ -47,7 +50,7 @@ class GameState {
     this.choiceHistory = []
 
     this.puzzleAttemptsLeft = 3
-    this.totalPuzzles = 5
+    this.totalPuzzles = this.locationData.length
 
     if (window.isQuickplay) {
       this.eventBindings = {

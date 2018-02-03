@@ -1,7 +1,7 @@
 import styles from './media.css';
 import { hidden as hiddenCls } from 'shared/main.css';
 import template from './template';
-import defaultMediaList from 'data/media';
+
 import {
   EVT_PUZZLE_FAIL,
   EVT_PUZZLE_SUCCESS,
@@ -9,16 +9,13 @@ import {
   EVT_PUZZLE_DATA_SENT
 } from 'data/events';
 
-let mediaList
-
 class MediaTab {
-  constructor() {
+  constructor(locationDataArray) {
     this.template = template
+    this.locations = locationDataArray
   }
 
   init (moduleId, el, emitter) {
-    mediaList = (window.customData) ? window.customData.images : defaultMediaList
-
     this.id = moduleId;
     this.emitter = emitter;
     this.unencrypted = [];
@@ -44,13 +41,13 @@ class MediaTab {
   }
 
   releasePhoto (index) {
-    if (index >= mediaList.length) {
+    if (index >= this.locations.length) {
         return;
     }
 
     const imgContainer = this.mediaPanel.querySelector(`[data-index="${index}"]`);
     const imgEl = document.createElement('img');
-    imgEl.src = mediaList[index].url;
+    imgEl.src = this.locations[index].url;
     imgEl.dataset['index'] = index;
     imgEl.addEventListener('click', () => {
         this.onImageClick(imgEl);
@@ -92,11 +89,11 @@ class MediaTab {
     const passcodeEl = this.mediaDetail.querySelector('[name="passcode"]');
     const index = imgEl.dataset.index;
 
-    if (index >= mediaList.length) {
+    if (index >= this.locations.length) {
       return false;
     }
 
-    if ( passcodeEl.value === mediaList[index].passcode ) {
+    if ( passcodeEl.value === this.locations[index].passcode ) {
       this.unencrypted.push(index);
       this.mediaPanel.querySelector(`div[data-index="${index}"]`).classList.add(styles.complete);
       this.emitter.dispatch(EVT_PUZZLE_SUCCESS, index);
@@ -112,7 +109,7 @@ class MediaTab {
   expandPacket (index) {
     // Display the contents of the specified info packet
     const packetEl = this.mediaPacket.querySelector('#infoPacket');
-    packetEl.value = mediaList[index].payload;
+    packetEl.value = this.locations[index].payload;
     packetEl.dataset.index = index;
     this.mediaPacket.classList.remove(hiddenCls);
   }

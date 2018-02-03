@@ -327,10 +327,6 @@ export default {
       },
       {
         chat: CHAT_A,
-        text: 'Keep your wits about you.'
-      },
-      {
-        chat: CHAT_A,
         text: 'Did you do something?'
       },
       {

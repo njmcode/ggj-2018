@@ -12,6 +12,7 @@ import MediaTab from 'modules/media/MediaTab'
 import { CHAT_A, CHAT_B } from 'data/gamescript'
 import { EVT_TAB_NOTIFY, EVT_PLAY_SOUND } from 'data/events'
 import sounds from 'data/sounds'
+import defaultMediaList from 'data/media';
 
 /**
  * Main app UI class.
@@ -27,6 +28,8 @@ import sounds from 'data/sounds'
 class App {
   constructor() {
     this.initialTabId = 'ChatA'
+
+    const locationData = window.customData ? window.customData.images : defaultMediaList
 
     this.appEl = document.body
     this.tabData = [
@@ -46,15 +49,14 @@ class App {
         id: 'Media',
         label: 'Media',
         visible: window.quickPlay,
-        module: new MediaTab()
+        module: new MediaTab(locationData)
       }
     ]
     this.tabDataIds = this.tabData.map(td => td.id)
 
     this.soundplayer = new SoundPlayer(sounds)
-    console.log(this.soundplayer)
     this.emitter = new Emitter()
-    this.gamestate = new GameState(this.emitter)
+    this.gamestate = new GameState(this.emitter, locationData)
 
     window.emitter = this.emitter
   }
