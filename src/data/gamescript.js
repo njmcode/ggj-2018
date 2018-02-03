@@ -147,7 +147,8 @@ export default {
       {
         chat: CHAT_A,
         text: 'Fantastic work Agent 045, please proceed to the next package for more information.',
-        event: Events.EVT_FIRST_NEWS_ARTICLE
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-0' ]
       }
     ],
 
@@ -269,7 +270,8 @@ export default {
           },
           {
             text: 'I don\'t know you, be gone scum.',
-            event: Events.EVT_SECOND_NEWS_ARTICLE,
+            event: Events.EVT_NEWS_ARTICLE,
+            eventParams: [ 'article-1' ],
             goto: null,
           }
         ]
@@ -390,11 +392,14 @@ export default {
         choices: [
           {
             text: 'Who are you, exactly?',
+            event: Events.EVT_NEWS_ARTICLE,
+            eventParams: [ 'article-2' ],
             goto: 'goingon',
           },
           {
             text: 'What\'s going on?',
-            event: Events.EVT_THIRD_NEWS_ARTICLE,
+            event: Events.EVT_NEWS_ARTICLE,
+            eventParams: [ 'article-2' ],
             goto: 'goingon',
           }
         ]
@@ -452,7 +457,8 @@ export default {
       {
         chat: CHAT_B,
         text: 'If you\'re interested in saving the planet, you\'ll do as I say.',
-        event: Events.EVT_THIRD_NEWS_ARTICLE,
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-2' ]
       }
     ],
 
@@ -536,7 +542,9 @@ export default {
       {
         chat: CHAT_B,
         speaker: 'agentA',
-        text: 'Idiot. '
+        text: 'Idiot.',
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-3' ]
       }
     ],
 
@@ -595,7 +603,8 @@ export default {
         chat: CHAT_B,
         speaker: 'agentB',
         text: 'Idiot.',
-        event: Events.EVT_FOURTH_NEWS_ARTICLE
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-3' ]
       }
     ],
 
@@ -653,7 +662,8 @@ export default {
         chat: CHAT_A,
         speaker: 'agentB',
         text: 'You\'ve doomed us all.',
-        event: Events.EVT_FIFTHB_NEWS_ARTICLE
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-bluewin' ]
       }
     ],
 
@@ -687,7 +697,8 @@ export default {
         chat: CHAT_B,
         speaker: 'agentA',
         text: 'You\'ve doomed us all.',
-        event: Events.EVT_FIFTHR_NEWS_ARTICLE
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-redwin' ]
       }
     ],
 
