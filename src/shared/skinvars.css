@@ -1,0 +1,45 @@
+@value winBlue, chatBlue, chatGreen, chatRed from './colors.css';
+
+:root {
+  /* Header bar */
+  --app-title-bg: winBlue;
+  --app-title-text: white;
+  --app-title-border: silver;
+
+  /* Dialog */
+  --app-dialog-bg: silver;
+  --app-dialog-border: lightgrey;
+  --app-dialog-text: black;
+
+  /* Buttons */
+  --app-button-bg: silver;
+  --app-button-bg-hover: #d0d0d0;
+  --app-button-border: lightgrey;
+  --app-button-text: black;
+
+  /* Tab nav */
+  --nav-bg: blue;
+  --nav-tab-active: yellow;
+  --nav-tab-notify: red;
+
+  /* Chat colors */
+  --chat-msg-1: chatBlue;
+  --chat-msg-2: chatRed;
+  --chat-msg-player: chatGreen;
+  --chat-msg-text: black;
+  --chat-tab-bg: silver;
+  --chat-choice-bg: blue;
+
+  /* Media tab */
+  --media-tab-bg: white;
+  --media-passcode-bg: white;
+  --media-passcode-text: black;
+  --media-payload-title: red;
+  --media-payload-bg: black;
+  --media-payload-text: #00ff00;
+
+  /* Footer */
+  --footer-bg: lightslategray;
+  --footer-text: black;
+  --footer-border: silver;
+}

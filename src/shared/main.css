@@ -1,5 +1,6 @@
 /* Reset */
 @import 'https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css';
+@import './skinvars.css';
 
 * {
   box-sizing: border-box;
@@ -29,16 +30,16 @@ body {
 button {
   -webkit-appearance: none;
   appearance: none;
-  background: silver;
-  border: 2px outset lightgray;
+  background: var(--app-button-bg);
+  border: 2px outset var(--app-button-border);
+  color: var(--app-button-text);
   padding: 4px;
   font-weight: 800;
   cursor:pointer;
 }
 button:hover {
-  background-color: #d0d0d0;
+  background-color: var(--app-button-bg-hover);
 }
-
 
 :global(#splash-logo) {
   background: url('assets/ISEEKU_logo.gif') no-repeat center center;

@@ -1,6 +1,6 @@
 
 .mediaPanel {
-    background: white;
+    background: var(--media-tab-bg);
     height: 100%;
     position: relative;
 }
@@ -34,8 +34,9 @@
 
 .mediaDetail,
 .mediaPacket {
-    background-color: silver;
-    border: 1px solid black;
+    background-color: var(--app-dialog-bg);
+    border: 2px outset var(--app-dialog-border);
+    color: var(--app-dialog-text);
     margin: 5px;
     padding: 5px;
     position: absolute;
@@ -61,7 +62,12 @@
 }
 
 .formRow input {
+    -webkit-appearance: none;
+    appearance: none;
+    border: 2px inset var(--app-dialog-border);
     flex-grow: 1;
+    background-color: var(--media-passcode-bg);
+    color: var(--media-passcode-text);
 }
 
 .mediaPacket > textarea {
@@ -70,7 +76,7 @@
 }
 
 .packetHeader {
-    color: red;
+    color: var(--media-payload-title);
     margin: 10px 0;
     text-align: center;
 }
@@ -94,8 +100,8 @@
 }
 
 .monochrome {
-    background-color: #000000;
-    color: #00ff00;
+    background-color: var(--media-payload-bg);
+    color: var(--media-payload-text);
     font-family: monospace;
     font-size: 1.5em;
 }
