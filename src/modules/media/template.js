@@ -27,7 +27,7 @@ export default `
         <h1 class="${styles.packetHeader}">Information Packet Uncovered</h1>
         <textarea id="infoPacket" class="${styles.monochrome}" disabled></textarea>
         <div class="${styles.formRow}">
-            <button id="packet-transmit" type="button">Send</button>
+            <button id="packet-transmit" type="button">Transmit</button>
         </div>
     </div>
 </div>

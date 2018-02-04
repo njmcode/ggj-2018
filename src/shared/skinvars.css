@@ -16,6 +16,7 @@
   --app-button-bg-hover: #d0d0d0;
   --app-button-border: lightgrey;
   --app-button-text: black;
+  --app-button-disabled-text: #777;
 
   /* Tab nav */
   --nav-bg: blue;

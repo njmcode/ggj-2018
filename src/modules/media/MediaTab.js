@@ -111,6 +111,9 @@ class MediaTab {
     const packetEl = this.mediaPacket.querySelector('#infoPacket');
     packetEl.value = this.locations[index].payload;
     packetEl.dataset.index = index;
+    const isAlreadySent = this.transmittedPackets.indexOf(index) > -1;
+    const sendButEl = this.mediaPacket.querySelector('#packet-transmit')
+    sendButEl.textContent = isAlreadySent ? 'Close' : 'Transmit';
     this.mediaPacket.classList.remove(hiddenCls);
   }
 

@@ -37,7 +37,10 @@ button {
   font-weight: 800;
   cursor:pointer;
 }
-button:hover {
+button[disabled] {
+  color: var(--app-button-disabled-text);
+}
+button:not([disabled]):hover {
   background-color: var(--app-button-bg-hover);
 }
 
