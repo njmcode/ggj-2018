@@ -1,0 +1,27 @@
+
+.newsPanel {
+  display: block;
+  height: 100%;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.articleList {
+  background: silver;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 15px;
+}
+
+.newMarker {
+  background: url('assets/new.gif') no-repeat center 75%;
+  display: none;
+  height: 1em;
+  line-height: 1em;
+  width: 31px;
+}
+
+.articleList article:first-child .newMarker {
+  display: inline-block;
+}

@@ -51,7 +51,11 @@ export default {
     'activated': [
       {
         chat: CHAT_A,
-        text: 'Ah good, you\'re there. We have a situation here that we need you immediate assistance with.'
+        text: 'Ah good, you\'re there. Call me Jones; I\'ll be your handler.'
+      }, 
+      {
+        chat: CHAT_A,
+        text: 'We have a situation here that we need your immediate assistance with.'
       },
       {
         chat: CHAT_A,
@@ -143,7 +147,8 @@ export default {
       {
         chat: CHAT_A,
         text: 'Fantastic work Agent 045, please proceed to the next package for more information.',
-        event: Events.EVT_FIRST_NEWS_ARTICLE
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-0' ]
       }
     ],
 
@@ -182,7 +187,7 @@ export default {
       },
       {
         chat: CHAT_A,
-        text: 'Do no read the files, just send them straight to us, understand? That\'s a command soldier.'
+        text: 'Do not read the files, just send them straight to us, understand? That\'s a command soldier.'
       },
       {
         chat: CHAT_A,
@@ -202,13 +207,13 @@ export default {
     'understoodrisk': [
       {
         chat: CHAT_B,
-        text: 'Agent 045. Do not trust Agent B.'
+        text: 'Agent 045. Do not trust Agent Jones.'
       },
       {
         chat: CHAT_B,
         choices: [
           {
-            text: 'What to you mean?',
+            text: 'What do you mean?',
             goto: 'thewarning'
           },
           {
@@ -234,7 +239,7 @@ export default {
       },
       {
         chat: CHAT_B,
-        text: 'Agent 045. Do not trust Agent B.'
+        text: 'Agent 045. This is Smith. Do not trust Agent Jones.'
       },
       {
       	chat: CHAT_B,
@@ -254,7 +259,9 @@ export default {
     'thewarning': [
       {
         chat: CHAT_B,
-        text: 'You\'ve been warned.'
+        text: 'You\'ve been warned.',
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-1' ]
       },
       {
       	chat: CHAT_B,
@@ -265,7 +272,6 @@ export default {
           },
           {
             text: 'I don\'t know you, be gone scum.',
-            event: Events.EVT_SECOND_NEWS_ARTICLE,
             goto: null,
           }
         ]
@@ -279,11 +285,11 @@ export default {
       },
       {
         chat: CHAT_B,
-        text: 'Do you see the kind of information you\'re dealing with here.'
+        text: 'Now you see the kind of information you\'re dealing with here.'
       },
       {
         chat: CHAT_B,
-        text: 'Do you really trust this kind of information with Agent B?'
+        text: 'Do you really trust this kind of information with Agent Jones?'
       },
       {
         chat: CHAT_B,
@@ -315,7 +321,7 @@ export default {
       },
       {
         chat: CHAT_B,
-        text: 'Don\'t blindly do what they tell you too.'
+        text: 'Don\'t blindly do what they tell you to.'
       },
       {
         chat: CHAT_B,
@@ -343,11 +349,11 @@ export default {
     'oddsignal': [
       {
         chat: CHAT_A,
-        text: ' I picked up an odd signal there.'
+        text: 'I picked up an odd signal there.'
       },
       {
         chat: CHAT_A,
-        text: 'It was very faint, but I thought I saw…'
+        text: 'It was very faint, but I thought I saw...'
       },
       {
         chat: CHAT_A,
@@ -361,7 +367,7 @@ export default {
             goto: 'wisechoice',
           },
           {
-            text: 'Do you mean Agent R?',
+            text: 'Do you mean Agent Smith?',
             goto: 'unwisechoice',
           }
         ]
@@ -371,7 +377,7 @@ export default {
     'wisechoice': [
       {
         chat: CHAT_A,
-        text: ' Ok. Just let me know if you anything comes up.'
+        text: 'Ok. Just let me know if you anything comes up.'
       },
       {
         chat: CHAT_B,
@@ -385,12 +391,11 @@ export default {
       	chat: CHAT_B,
         choices: [
           {
-            text: 'Who are you?',
+            text: 'Who are you, exactly?',
             goto: 'goingon',
           },
           {
             text: 'What\'s going on?',
-            event: Events.EVT_THIRD_NEWS_ARTICLE,
             goto: 'goingon',
           }
         ]
@@ -400,14 +405,16 @@ export default {
     'goingon': [
       {
         chat: CHAT_B,
-        text: ' That\'s not important right now. The safety of the world is at stake, just make it to the packets and I\'ll tell you what to do from there. '
+        text: 'That\'s not important right now. The safety of the world is at stake, just make it to the packets and I\'ll tell you what to do from there.',
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-2' ]
       }
     ],
 
     'unwisechoice': [
       {
         chat: CHAT_A,
-        text: ' Agent R?! DO NOT ENGAGE, I repeat, DO NOT ENGAGE with Agent R! They are not to be trusted! '
+        text: 'Agent Smith?! DO NOT ENGAGE, I repeat, DO NOT ENGAGE with Agent Smith! They are not to be trusted! '
       },
       {
         chat: CHAT_A,
@@ -419,7 +426,7 @@ export default {
       },
       {
         chat: CHAT_B,
-        text: 'If you do as Agent B says, we\'re all doomed!'
+        text: 'If you do as Agent Jones says, we\'re all doomed!'
       },
       {
       	chat: CHAT_B,
@@ -439,35 +446,40 @@ export default {
     'trust': [
       {
         chat: CHAT_B,
-        text: ' There\'s no time to explain right now, you just have to trust me.'
+        text: 'There\'s no time to explain right now, you just have to trust me.'
       },
       {
         chat: CHAT_B,
-        text: ' Get to the next info packet. Act as normal.'
+        text: 'Get to the next info packet. Act as normal.'
       },
       {
         chat: CHAT_B,
-        text: ' If you\'re interested in saving the planet, you\'ll do as I say.',
-        event: Events.EVT_THIRD_NEWS_ARTICLE,
+        text: 'If you\'re interested in saving the planet, you\'ll do as I say.',
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-2' ]
       }
     ],
 
     'helloagents': [
       {
         chat: CHAT_B,
-        text: 'Agent B: So, here you are.'
+        speaker: 'agentA',
+        text: 'So, here you are.'
       },
       {
         chat: CHAT_B,
-        text: 'Agent R: I guess you found me.'
+        speaker: 'agentB',
+        text: 'I guess you found me.'
       },
       {
         chat: CHAT_B,
-        text: 'Agent B: We\'ve tracked you Agent R. You\'ve nowhere to hide.'
+        speaker: 'agentA',
+        text: 'We\'ve tracked you Agent Smith. You\'ve nowhere to hide.'
       },
       {
         chat: CHAT_B,
-        text: 'Agent R: We won\'t let you get a hold of the info packet.'
+        speaker: 'agentB',
+        text: 'We won\'t let you get a hold of the info packet.'
       },
       {
        	chat: CHAT_B,
@@ -478,152 +490,213 @@ export default {
           },
           {
             text: 'I don\'t think so.',
-            goto: 'agentr1',
+            goto: 'agenta1',
           }
         ]
+      }
+    ],
+
+    'agenta1': [
+      {
+        chat: CHAT_B,
+        speaker: 'agentA',
+        text: 'Ha!'
+      },
+      {
+        chat: CHAT_B,
+        speaker: 'agentB',
+        text: '045… I thought you were better than this.'
+      },
+      {
+        chat: CHAT_B,
+        speaker: 'agentB',
+        text: 'You\'re signing your own death warrant.'
+      },
+      {
+        chat: CHAT_B,
+        speaker: 'agentA',
+        text: 'Don\'t be ridiculous.'
+      },
+      {
+        chat: CHAT_B,
+        speaker: 'agentA',
+        text: 'Get to the last info point Agent 045.'
+      },
+      {
+        chat: CHAT_B,
+        speaker: 'agentA',
+        text: 'Then we can annihilate this scum.'
+      },
+      {
+        chat: CHAT_B,
+        speaker: 'agentB',
+        text: 'There\'s still time.'
+      },
+      {
+        chat: CHAT_B,
+        speaker: 'agentB',
+        text: 'I hope that when the time comes, you\'ll make the right choice.'
+      },
+      {
+        chat: CHAT_B,
+        speaker: 'agentA',
+        text: 'Idiot.',
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-3' ]
       }
     ],
 
     'agentb1': [
       {
         chat: CHAT_B,
-        text: 'Agent B: Ha!'
+        speaker: 'agentA',
+        text: 'Excuse me??'
       },
       {
         chat: CHAT_B,
-        text: 'Agent R: 045… I thought you were better than this.'
+        speaker: 'agentB',
+        text: 'I think you heard them Jones.'
       },
       {
         chat: CHAT_B,
-        text: 'Agent R: You\'re signing your own death warrant.'
+        speaker: 'agentB',
+        text: 'They won\'t be helping you anymore.'
       },
       {
         chat: CHAT_B,
-        text: 'Agent B: Don\'t be ridiculous.'
+        speaker: 'agentA',
+        text: 'Are you an idiot?!'
       },
       {
         chat: CHAT_B,
-        text: 'Agent B: Get to the last info point Agent 045.'
+        speaker: 'agentA',
+        text: 'You\'ll be helping a physcopath!'
       },
       {
         chat: CHAT_B,
-        text: 'Agent B: Then we can annihilate this scum.'
+        speaker: 'agentA',
+        text: 'This will start world war 3!'
       },
       {
         chat: CHAT_B,
-        text: 'Agent R: There\'s still time.'
+        speaker: 'agentB',
+        text: 'Don\'t waste your breath Jones. They\'ve made their choice.'
       },
       {
         chat: CHAT_B,
-        text: 'Agent R: I hope that when the time comes, you\'ll make the right choice.'
+        speaker: 'agentB',
+        text: 'We won\'t start a war, we\'ll be ending it.'
       },
       {
         chat: CHAT_B,
-        text: 'Agent B: Idiot. '
+        speaker: 'agentA',
+        text: 'I beg of you, please. You still have time to change your mind.'
+      },
+      {
+        chat: CHAT_B,
+        speaker: 'agentA',
+        text: 'When the time comes, send the pack to me.'
+      },
+      {
+        chat: CHAT_B,
+        speaker: 'agentB',
+        text: 'Idiot.',
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-3' ]
       }
     ],
 
-    'agentr1': [
+    'finalpacket': [
       {
-        chat: CHAT_B,
-        text: 'Agent B: Excuse me??'
+        chat: CHAT_A,
+        text: 'Excellent work, Agent 045! That\'s the final packet.'
       },
       {
-        chat: CHAT_B,
-        text: 'Agent R: I think you heard them B.'
+        chat: CHAT_A,
+        text: 'Forward it to me now, and we can end this quickly!'
       },
       {
-        chat: CHAT_B,
-        text: 'Agent R: They won\'t be helping you anymore.'
-      },
-      {
-        chat: CHAT_B,
-        text: 'Agent B: Are you an idiot?!'
-      },
-      {
-        chat: CHAT_B,
-        text: 'Agent B: You\'ll be helping a physcopath!'
-      },
-      {
-        chat: CHAT_B,
-        text: 'Agent B: This will start world war 3!'
-      },
-      {
-        chat: CHAT_B,
-        text: 'Agent R: Don\'t waste your breath B. They\'ve made their choice.'
-      },
-      {
-        chat: CHAT_B,
-        text: 'Agent R: We won\'t start a war, we\'ll be ending it.'
-      },
-        {
-        chat: CHAT_B,
-        text: 'Agent B: I beg of you, please. You still have time to change your mind.'
-      },
-      {
-        chat: CHAT_B,
-        text: 'Agent B: When the time comes, send the pack to me.'
-      },
-      {
-        chat: CHAT_B,
-        text: 'Agent B: Idiot.',
-        event: Events.EVT_FOURTH_NEWS_ARTICLE
+        chat: CHAT_A,
+        choices: [
+          {
+            text: 'Roger that. [TRANSMIT TO JONES]',
+            goto: 'bluepacket'
+          },
+          {
+            text: 'No. [TRANSMIT TO SMITH]',
+            goto: 'redpacket'
+          }
+        ]
       }
     ],
 
     'bluepacket': [
       {
-        chat: CHAT_B,
-        text: 'Agent B: Well done Agent 045, you\'ve made the correct decision.'
+        chat: CHAT_A,
+        speaker: 'agentA',
+        text: 'Well done Agent 045, you\'ve made the correct decision.'
       },
       {
-        chat: CHAT_B,
-        text: 'Agent R: Oh god. What have you done.'
+        chat: CHAT_A,
+        speaker: 'agentB',
+        text: 'Oh god. What have you done.'
       },
       {
-        chat: CHAT_B,
-        text: 'Agent B: Exactly what he was meant to, R.'
+        chat: CHAT_A,
+        speaker: 'agentA',
+        text: 'Exactly what he was meant to, Smith.'
       },
       {
-        chat: CHAT_B,
-        text: 'Agent B: I hope you\'ve enjoyed your time on this earth.'
+        chat: CHAT_A,
+        speaker: 'agentA',
+        text: 'I hope you\'ve enjoyed your time on this earth.'
       },
       {
-        chat: CHAT_B,
-        text: 'Agent B: You will be rewarded Agent 045.'
+        chat: CHAT_A,
+        speaker: 'agentA',
+        text: 'You will be rewarded Agent 045.'
       },
       {
-        chat: CHAT_B,
-        text: 'Agent R: You\'ve doomed us all.',
-        event: Events.EVT_FIFTHB_NEWS_ARTICLE
+        chat: CHAT_A,
+        speaker: 'agentB',
+        text: 'You\'ve doomed us all.',
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-bluewin' ]
       }
     ],
 
     'redpacket': [
       {
         chat: CHAT_B,
-        text: 'Agent R: Well done Agent 045, you\'ve made the correct decision.'
+        speaker: 'agentB',
+        text: 'Well done Agent 045, you\'ve made the correct decision.'
       },
       {
         chat: CHAT_B,
-        text: 'Agent B: Oh god. What have you done.'
+        speaker: 'agentA',
+        text: 'Oh god. What have you done.'
       },
       {
         chat: CHAT_B,
-        text: 'Agent R: Exactly what he was meant to, R.'
+        speaker: 'agentB',
+        text: 'Exactly what he was meant to, Jones.'
       },
       {
         chat: CHAT_B,
-        text: 'Agent R: I hope you\'ve enjoyed your time on this earth.'
+        speaker: 'agentB',
+        text: 'I hope you\'ve enjoyed your time on this earth.'
       },
       {
         chat: CHAT_B,
-        text: 'Agent R: You will be rewarded Agent 045.'
+        speaker: 'agentB',
+        text: 'You will be rewarded Agent 045.'
       },
       {
         chat: CHAT_B,
-        text: 'Agent B: You\'ve doomed us all.',
-        event: Events.EVT_FIFTHR_NEWS_ARTICLE
+        speaker: 'agentA',
+        text: 'You\'ve doomed us all.',
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-redwin' ]
       }
     ],
 
@@ -646,25 +719,6 @@ export default {
         chat: CHAT_A,
         text: 'You\'ve proven yourself unable to handle this mission. You will not be contacted again.',
         event: Events.EVT_FAILGAME
-      }
-    ],
-
-    'tempwin': [
-      {
-        chat: CHAT_A,
-        text: 'Well done, Agent 045!'
-      },
-      {
-        chat: CHAT_A,
-        text: 'You\'ve proven yourself quite capable in the field.'
-      },
-      {
-        chat: CHAT_A,
-        text: 'We\'ll be in touch again soon.'
-      },
-      {
-        chat: CHAT_A,
-        text: '*** TRANSMISSION ENDED ***'
       }
     ]
   }

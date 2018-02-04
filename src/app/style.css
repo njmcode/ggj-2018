@@ -83,6 +83,9 @@
 .tabNav button[data-tab-id*="Media"] {
   background-image:url('assets/media.png');
 }
+.tabNav button[data-tab-id*="News"] {
+  background-image:url('assets/news.png');
+}
 
 /* Content */
 

@@ -43,8 +43,8 @@ class GameState {
       'firstpuzzlesent',
       'strangepackage',
       'readfile',
-      '',
-      'tempwin'
+      'helloagents',
+      'finalpacket'
     ]
 
     this.choiceHistory = []
@@ -102,7 +102,7 @@ class GameState {
 
     if (msg) {
       if (msg.event) {
-        this.emitter.dispatch(msg.event)
+        this.emitter.dispatch(msg.event, msg.eventParams || {})
       }
       if (msg.choices) {
         this.emitter.dispatch(EVT_CHOICES_RECEIVED, msg)

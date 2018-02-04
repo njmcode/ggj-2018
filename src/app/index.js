@@ -8,6 +8,7 @@ import SoundPlayer from 'core/SoundPlayer'
 import GameState from './GameState'
 import ChatTab from 'modules/chat/ChatTab'
 import MediaTab from 'modules/media/MediaTab'
+import NewsTab from 'modules/news/NewsTab'
 
 import { CHAT_A, CHAT_B } from 'data/gamescript'
 import { EVT_TAB_NOTIFY, EVT_PLAY_SOUND } from 'data/events'
@@ -50,6 +51,12 @@ class App {
         label: 'Media',
         visible: window.quickPlay,
         module: new MediaTab(locationData)
+      },
+      {
+        id: 'News',
+        label: 'News',
+        visible: window.quickPlay,
+        module: new NewsTab()
       }
     ]
     this.tabDataIds = this.tabData.map(td => td.id)
