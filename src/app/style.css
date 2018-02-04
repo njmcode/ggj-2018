@@ -76,6 +76,18 @@
   background: var(--nav-tab-notify);
   top: 0;
   right: 0;
+  animation: notify 0.5s steps(1, end) infinite;
+}
+@keyframes notify {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .tabNav button[data-tab-id*="Chat"] {
   background-image:url('assets/chat.png');
