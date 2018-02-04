@@ -5,6 +5,14 @@
     position: relative;
 }
 
+.mediaPanel [data-fail-game] {
+    color: red;
+    padding: 10px;
+    display: block;
+    font-family: monospace;
+    font-size: 14px;
+}
+
 .mediaList {
     display: flex;
     flex-flow: row wrap;

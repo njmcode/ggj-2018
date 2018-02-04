@@ -6,7 +6,8 @@ import {
   EVT_PUZZLE_FAIL,
   EVT_PUZZLE_SUCCESS,
   EVT_SEND_INITIAL_PHOTOS,
-  EVT_PUZZLE_DATA_SENT
+  EVT_PUZZLE_DATA_SENT,
+  EVT_FAILGAME
 } from 'data/events';
 
 class MediaTab {
@@ -38,6 +39,7 @@ class MediaTab {
         this.releasePhoto(x);
       }
     }, this);
+    this.emitter.bind(EVT_FAILGAME, this.destroyMediaPanel, this)
   }
 
   releasePhoto (index) {
@@ -133,6 +135,10 @@ class MediaTab {
       this.transmittedPackets.push(index);
     }
     this.closePacket();
+  }
+
+  destroyMediaPanel () {
+    this.mediaPanel.innerHTML = '<span data-fail-game>[ !$%^VFJBbnNtSQ==-- ERROR: media removed by remote user ]</span>';
   }
 };
 
