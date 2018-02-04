@@ -720,25 +720,6 @@ export default {
         text: 'You\'ve proven yourself unable to handle this mission. You will not be contacted again.',
         event: Events.EVT_FAILGAME
       }
-    ],
-
-    'tempwin': [
-      {
-        chat: CHAT_A,
-        text: 'Well done, Agent 045!'
-      },
-      {
-        chat: CHAT_A,
-        text: 'You\'ve proven yourself quite capable in the field.'
-      },
-      {
-        chat: CHAT_A,
-        text: 'We\'ll be in touch again soon.'
-      },
-      {
-        chat: CHAT_A,
-        text: '*** TRANSMISSION ENDED ***'
-      }
     ]
   }
 }
