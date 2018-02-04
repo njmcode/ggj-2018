@@ -213,7 +213,7 @@ export default {
         chat: CHAT_B,
         choices: [
           {
-            text: 'What to you mean?',
+            text: 'What do you mean?',
             goto: 'thewarning'
           },
           {
@@ -259,7 +259,9 @@ export default {
     'thewarning': [
       {
         chat: CHAT_B,
-        text: 'You\'ve been warned.'
+        text: 'You\'ve been warned.',
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-1' ]
       },
       {
       	chat: CHAT_B,
@@ -270,8 +272,6 @@ export default {
           },
           {
             text: 'I don\'t know you, be gone scum.',
-            event: Events.EVT_NEWS_ARTICLE,
-            eventParams: [ 'article-1' ],
             goto: null,
           }
         ]
@@ -392,14 +392,10 @@ export default {
         choices: [
           {
             text: 'Who are you, exactly?',
-            event: Events.EVT_NEWS_ARTICLE,
-            eventParams: [ 'article-2' ],
             goto: 'goingon',
           },
           {
             text: 'What\'s going on?',
-            event: Events.EVT_NEWS_ARTICLE,
-            eventParams: [ 'article-2' ],
             goto: 'goingon',
           }
         ]
@@ -409,7 +405,9 @@ export default {
     'goingon': [
       {
         chat: CHAT_B,
-        text: 'That\'s not important right now. The safety of the world is at stake, just make it to the packets and I\'ll tell you what to do from there. '
+        text: 'That\'s not important right now. The safety of the world is at stake, just make it to the packets and I\'ll tell you what to do from there.',
+        event: Events.EVT_NEWS_ARTICLE,
+        eventParams: [ 'article-2' ]
       }
     ],
 

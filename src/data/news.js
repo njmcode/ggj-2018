@@ -41,7 +41,7 @@ export default {
     sections: [
       {
         type: 'p',
-        content: 'After what appeared to be a period of peace between the two counties, the United States and Russia have been clashing year again. After the dissolvement of the Soviet Union, The United States has been pushed hard for further political and economic reforms in Russia. This is not being well received by the nation, which bristles at what they see as meddling in internal affairs.'
+        content: 'After what appeared to be a period of peace between the two counties, the United States and Russia have been clashing yet again. After the dissolvement of the Soviet Union, The United States has been pushed hard for further political and economic reforms in Russia. This is not being well received by the nation, which bristles at what they see as meddling in internal affairs.'
       },
       {
         type: 'p',
