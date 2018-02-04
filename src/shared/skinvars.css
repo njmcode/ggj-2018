@@ -38,6 +38,10 @@
   --media-payload-bg: black;
   --media-payload-text: #00ff00;
 
+  /* News tab */
+  --news-tab-bg: silver;
+  --news-tab-text: black;
+
   /* Footer */
   --footer-bg: lightslategray;
   --footer-text: black;
