@@ -48,7 +48,7 @@ class GameState {
     ]
 
     this.choiceHistory = []
-
+    this.isPlaying = true
     this.puzzleAttemptsLeft = 3
     this.totalPuzzles = this.locationData.length
 
@@ -98,18 +98,23 @@ class GameState {
   }
 
   advance() {
+    if (!this.isPlaying) return false
+
     const msg = this.reader.getNextMsg()
 
     if (msg) {
-      if (msg.event) {
-        this.emitter.dispatch(msg.event, msg.eventParams || {})
-      }
       if (msg.choices) {
+        if (msg.event) {
+          this.emitter.dispatch(msg.event, msg.eventParams || {})
+        }
         this.emitter.dispatch(EVT_CHOICES_RECEIVED, msg)
       } else {
         this.msgFn = () => {
           clearTimeout(this.msgTimeout);
           this.msgFn = () => {};
+          if (msg.event) {
+            this.emitter.dispatch(msg.event, msg.eventParams || {})
+          }
           this.emitter.dispatch(EVT_MESSAGE_RECEIVED, msg)
           this.advance()
         };
@@ -138,6 +143,7 @@ class GameState {
   }
 
   handlePlayerDecision(choice) {
+    if (!this.isPlaying) return false
     // TODO: handle game/state logic around selection
     this.choiceHistory.push(choice)
     this.reader.startChapter(choice.goto)
@@ -157,6 +163,8 @@ class GameState {
 
   // Called when a puzzle is completed (decrypted)
   handlePuzzleSuccess(puzzleId) {
+    if (!this.isPlaying) return false
+
     this.puzzleStatus[puzzleId].isComplete = true
 
     // Instructions after completing first puzzle
@@ -170,6 +178,8 @@ class GameState {
 
   // Called when a puzzle data is sent
   handlePuzzleDataSent(puzzleId) {
+    if (!this.isPlaying) return false
+
     this.puzzleStatus[puzzleId].isSent = true
 
     // Response after first puzzle sent
@@ -199,6 +209,8 @@ class GameState {
 
   // Fail messages if you screw up
   handlePuzzleFail(puzzleId) {
+    if (!this.isPlaying) return false
+
     this.puzzleAttemptsLeft--
 
     if (this.puzzleAttemptsLeft > 1) {
@@ -224,6 +236,7 @@ class GameState {
   handleGameOver() {
     // TODO: game over
     console.log('GAME OVER')
+    this.isPlaying = false
   }
 
 }

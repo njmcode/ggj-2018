@@ -156,6 +156,7 @@ function handleInput(bit) {
     return false;
   }
   score += 100;
+  scoreEl.textContent = score
   stream.shift();
   stream[STREAM_SIZE - 1] = getRandomBit();
   renderStream();
@@ -189,6 +190,7 @@ function doState(stateID) {
         if (timeRemaining <= 0) doState('title');
         timeEl.textContent = Math.ceil(timeRemaining / 1000);
       }, 100);
+      scoreEl.textContent = 0
       titleEl.style.display = 'none';
       playEl.style.display = 'block';
       state = 'play';
